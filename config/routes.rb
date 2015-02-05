@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
   root 'welcome#index'
+  devise_for :users
+
+  get 'sessions/new', as: :login
+  get 'sessions/destroy', as: :logout
 
   mount Mercury::Engine => '/'
   Mercury::Engine.routes

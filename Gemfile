@@ -28,6 +28,8 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'neo4j', '~> 4.1.2'
+gem "devise-neo4j"
+
 
 # Use unicorn as the app server
 # gem 'unicorn'
