@@ -9,6 +9,7 @@ class User
   #
 
   has_many :out, :articles, unique: true, type: :authored
+  has_many :out, :comments, unique: true, type: :authored
 
   property :username, :type => String
   property :facebook_token, :type => String

@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         @article.comments << @comment
+        @comment.author = current_user
 
         format.html { redirect_to @article, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }

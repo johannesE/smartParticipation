@@ -13,5 +13,5 @@ class Article
   # defines a method for traversing incoming rated relationships from Article
   has_many :in, :ratings, unique: true, rel_class: Rating
   has_many :in, :comments, unique: true, type: :comment_on
-  has_one :in, :user, unique:true, type: :authored
+  has_one :in, :author, unique:true, type: :authored, model_class: User
 end

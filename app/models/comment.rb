@@ -10,5 +10,6 @@ class Comment
 
   has_many :in, :users, unique: true, rel_class: Rating
   has_one :out, :articles, type: :comment_on
+  has_one :in, :author, unique:true, type: :authored, model_class: User
 
 end
