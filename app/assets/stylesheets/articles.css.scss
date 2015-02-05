@@ -1,0 +1,14 @@
+// Place all the styles related to the articles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "foundation";
+.red-panel {
+  @include panel(
+    // Sets the panel background color. Default: $panel-pg
+  $bg: #ff5a4b,
+    // Sets the panel padding amount. Default: $panel-padding
+  $padding: $panel-padding,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+  $adjust:true
+  );
+}

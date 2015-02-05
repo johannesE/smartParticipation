@@ -1,0 +1,45 @@
+<h1 id="article_title" data-mercury="simple">
+  <%= raw @article.title %>
+</h1>
+
+<dl class="tabs" data-tab>
+  <dd class="active"><a href="#panel1">Description</a></dd>
+  <dd><a href="#panel2">Images</a></dd>
+  <dd><a href="#panel3">Videos</a></dd>
+</dl>
+<div class="tabs-content">
+  <div class="content active" id="panel1">
+    <div id="article_body" class="panel" data-mercury="full">
+      <%= raw @article.body %>
+    </div>
+  </div>
+  <div class="content" id="panel2">
+    <div class="panel">
+      This is not yet implemented.
+    </div>
+  </div>
+  <div class="content" id="panel3">
+    <div class="panel">
+      This is not yet implemented either.
+    </div>
+  </div>
+</div>
+<%= link_to 'Back to the Articles', articles_path, :class => 'button secondary' %>
+<%= link_to 'Edit Article', '/editor' + article_path(@article), :class => 'button warning',
+            id: "edit_link", data: {save_url: mercury_update_article_path(@article), no_turbolink: true} %>
+<%= link_to 'Delete this Article', @article, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button alert' %>
+
+<div class="">
+  <% @comments.each do |c| %>
+      <div class="red-panel">
+        <%= c.body %>
+        <%= link_to "X", article_comment_path(@article, c),
+                    method: :delete, data: {confirm: 'Are you sure?'},
+                    :class => 'button alert right tiny' %>
+      </div>
+  <% end %>
+</div>
+<%= form_for [@article, @comment] do |f| %>
+<%= f.text_field :body %>
+<%= f.submit "Comment", class: 'button  small success' %>
+<% end %>

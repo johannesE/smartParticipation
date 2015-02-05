@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title><%= content_for?(:title) ? yield(:title) : 'SmartParticipation' %></title>
+
+    <%= stylesheet_link_tag "application", media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag "vendor/modernizr" %>
+    <%= javascript_include_tag "application" 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+<%= render '/layouts/navbar' %>
+
+
+<div class="row">
+  <div class="small-12 columns">
+    <% if notice %>
+        <div data-alert class="alert-box">
+          <%= notice %>
+          <a href="#" class="close">&times;</a>
+        </div>
+    <% end %>
+    <%= yield %>
+  </div>
+</div>
+<%= javascript_include_tag 'application' %>
+</body>
+</html>
