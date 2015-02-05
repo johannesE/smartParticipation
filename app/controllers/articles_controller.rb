@@ -21,6 +21,8 @@ class ArticlesController < ApplicationController
 
   # GET /articles/1/edit
   def edit
+    @comments = @article.comments
+    @comment = Comment.new
   end
 
   # POST /articles
@@ -30,6 +32,8 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
+        @article.user = current_user
+
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
       else
