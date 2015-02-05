@@ -4,22 +4,26 @@
 
 <dl class="tabs" data-tab>
   <dd class="active"><a href="#panel1">Description</a></dd>
+  <dd><a href="#panel4">Statistics</a></dd>
   <dd><a href="#panel2">Images</a></dd>
   <dd><a href="#panel3">Videos</a></dd>
 </dl>
 <div class="tabs-content">
   <div class="content active" id="panel1">
-    <div id="article_body" class="panel" data-mercury="full">
+    <div id="article_body" class="red-panel" data-mercury="full">
       <%= simple_format @article.body %>
     </div>
   </div>
+  <div class="content" id="panel4">
+        <div class="green-panel">There will be statistics here.</div>
+  </div>
   <div class="content" id="panel2">
-    <div class="panel">
+    <div class="yellow-panel">
       This is not yet implemented.
     </div>
   </div>
   <div class="content" id="panel3">
-    <div class="panel">
+    <div class="blue-panel">
       This is not yet implemented either.
     </div>
   </div>
@@ -31,7 +35,7 @@
 
 <div class="">
   <% @comments.each do |c| %>
-      <div class="red-panel">
+      <div class="panel">
         <%= c.body %>
         <%= link_to "X", article_comment_path(@article, c),
                     method: :delete, data: {confirm: 'Are you sure?'},
@@ -40,6 +44,6 @@
   <% end %>
 </div>
 <%= form_for [@article, @comment] do |f| %>
-<%= f.text_field :body %>
-<%= f.submit "Comment", class: 'button  small success' %>
+    <%= f.text_field :body %>
+    <%= f.submit "Comment", class: 'button  small success' %>
 <% end %>

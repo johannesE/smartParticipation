@@ -5,7 +5,37 @@
 .red-panel {
   @include panel(
     // Sets the panel background color. Default: $panel-pg
-  $bg: #ff5a4b,
+  $bg: #ff6450,
+    // Sets the panel padding amount. Default: $panel-padding
+  $padding: $panel-padding,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+  $adjust:true
+  );
+}
+.yellow-panel {
+  @include panel(
+    // Sets the panel background color. Default: $panel-pg
+  $bg: #faff57,
+    // Sets the panel padding amount. Default: $panel-padding
+  $padding: $panel-padding,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+  $adjust:true
+  );
+}
+.green-panel {
+  @include panel(
+    // Sets the panel background color. Default: $panel-pg
+  $bg: #6aff58,
+    // Sets the panel padding amount. Default: $panel-padding
+  $padding: $panel-padding,
+    // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
+  $adjust:true
+  );
+}
+.blue-panel {
+  @include panel(
+    // Sets the panel background color. Default: $panel-pg
+  $bg: #8187ff,
     // Sets the panel padding amount. Default: $panel-padding
   $padding: $panel-padding,
     // Sets the font color based on the darkness of the bg & resets header line-heights for panels. Default: $panel-header-adjust
