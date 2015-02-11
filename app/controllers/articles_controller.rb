@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :mercury_update]
+  before_action :verify_author, only: [:edit, :update, :destroy, :mercury_update]
 
   # GET /articles
   # GET /articles.json
@@ -68,7 +69,6 @@ class ArticlesController < ApplicationController
   end
 
   def mercury_update
-    @article = Article.find(params[:id])
     @article.title = params[:content][:article_title][:value]
     @article.body = params[:content][:article_body][:value]
     if @article.save
@@ -86,4 +86,11 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :body)
     end
+
+  def verify_author
+    if @article.author == current_user
+      true
+    end
+    false
+  end
 end
