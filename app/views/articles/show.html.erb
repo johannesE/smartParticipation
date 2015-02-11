@@ -15,7 +15,7 @@
     </div>
   </div>
   <div class="content" id="panel4">
-        <div class="green-panel">There will be statistics here.</div>
+    <div class="green-panel">There will be statistics here.</div>
   </div>
   <div class="content" id="panel2">
     <div class="yellow-panel">
@@ -44,11 +44,12 @@
   <% end %>
 </div>
 <% if current_user %>
-<%= form_for [@article, @comment] do |f| %>
-    <%= f.text_field :body %>
-    <%= f.submit "Comment", class: 'button  small success' %>
-<% end %>
+    <%= form_for [@article, @comment] do |f| %>
+        <%= f.text_field :body %>
+        <%= f.submit "Comment", class: 'button  small success' %>
+    <% end %>
 <% else %>
     <div class="panel success">You need to <%= link_to 'sign up', new_user_registration_path, class: '' %>
-      or <%= link_to 'log in', new_user_session_path, class: '' %> to comment on this article.</div>
+      or <%= link_to 'log in', new_user_session_path, class: '' %> to comment on this article.
+    </div>
 <% end %>
