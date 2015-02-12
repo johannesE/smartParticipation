@@ -81,7 +81,7 @@ class ArticlesController < ApplicationController
     current_user.rels(type: :rates, between: @article).each{|rel| rel.destroy}
     Rating.create(:value => rating,
                     :from_node => current_user, :to_node => @article)
-    render text: ''
+    render text: rating
   end
 
   private

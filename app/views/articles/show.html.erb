@@ -54,7 +54,7 @@
         Your previous rating:
         <% rel = current_user.rels(type: :rates, between: @article) %>
         <% rating = rel.first.nil? ? "none" : rel.first[:value] %>
-        <%= rating %>
+        <span id="rating"> <%= rating %> </span>
       </div>
     </div>
   </div>
