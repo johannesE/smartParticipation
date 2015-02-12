@@ -15,7 +15,9 @@
     </div>
   </div>
   <div class="content" id="panel4">
-    <div class="green-panel">There will be statistics here.</div>
+    <div class="green-panel">There will be statistics here.
+      <h4>Average Rating: <%= @article.get_average_rating %></h4>
+    </div>
   </div>
   <div class="content" id="panel2">
     <div class="yellow-panel">
@@ -50,7 +52,8 @@
             <%= submit_tag 'Rate this Article', class: 'button expand' %>
         <% end %>
       </div>
-      <div class="small-6 columns text-center panel">
+      <div class="small-6 columns text-center">
+        <br>
         Your previous rating:
         <% rel = current_user.rels(type: :rates, between: @article) %>
         <% rating = rel.first.nil? ? "none" : rel.first[:value] %>

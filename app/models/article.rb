@@ -13,4 +13,17 @@ class Article
   has_many :in, :ratings, unique: true, rel_class: Rating
   has_many :in, :comments, unique: true, type: :comment_on
   has_one :in, :author, unique: true, type: :authored, model_class: User
+
+  def get_average_rating
+    sum = 0
+    number = 0
+
+    rels(type: :rates, dir: :incoming).each do |r|
+      sum += r.value
+      number += 1
+    end
+
+    sum / number
+  end
+
 end

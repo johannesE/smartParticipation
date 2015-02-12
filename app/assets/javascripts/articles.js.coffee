@@ -8,7 +8,7 @@ $(document).ready ->
     $("#rateArticleForm").find(":submit").toggleClass("disabled")
     $("#articleRatingDiv").prepend('<div class="fade-away"><div data-alert class="alert-box success">
       Thank you for your rating.
-      </div></div>  ')
+      </div></div>')
     $(".fade-away").fadeOut(4000)
     return
 
