@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy, :mercury_update]
+  before_action :set_article, only: [:show, :edit, :update, :destroy, :mercury_update, :rate]
   before_action :verify_author, only: [:edit, :update, :destroy, :mercury_update]
 
   # GET /articles
@@ -76,16 +76,24 @@ class ArticlesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
-    end
+  def rate
+    rating = params[:articleRating]
+    current_user.rels(type: :rates, between: @article).each{|rel| rel.destroy}
+    Rating.create(:value => rating,
+                    :from_node => current_user, :to_node => @article)
+    render text: ''
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def article_params
-      params.require(:article).permit(:title, :body)
-    end
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_article
+    @article = Article.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def article_params
+    params.require(:article).permit(:title, :body)
+  end
 
   def verify_author
     if @article.author == current_user

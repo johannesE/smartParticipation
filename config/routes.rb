@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   Mercury::Engine.routes
 
   resources :articles do
-    member { put :mercury_update }
+    member { put :mercury_update}
+    member { post :rate }
     resources :comments
   end
 

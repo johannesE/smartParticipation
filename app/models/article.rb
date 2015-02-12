@@ -10,8 +10,7 @@ class Article
   property :updated_at, type: DateTime
   # property :updated_on, type: Date
 
-  # defines a method for traversing incoming rated relationships from Article
   has_many :in, :ratings, unique: true, rel_class: Rating
   has_many :in, :comments, unique: true, type: :comment_on
-  has_one :in, :author, unique:true, type: :authored, model_class: User
+  has_one :in, :author, unique: true, type: :authored, model_class: User
 end

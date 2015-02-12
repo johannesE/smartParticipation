@@ -28,11 +28,56 @@
     </div>
   </div>
 </div>
-<%= link_to 'Back to the Articles', articles_path, :class => 'button secondary' %>
-<%= link_to 'Edit Article', '/editor' + article_path(@article), :class => 'button warning',
-            id: "edit_link", data: {save_url: mercury_update_article_path(@article), no_turbolink: true} %>
-<%= link_to 'Delete this Article', @article, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button alert' %>
 
+<!-- Rate The Article -->
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <div class="row">
+      <div class="small-12 medium-12 columns">
+        <div class="range-slider" id="articleRatingSlider" data-slider data-options="display_selector: #articleRatingOutput;">
+          <span class="range-slider-handle" role="slider" tabindex="0"></span>
+          <span class="range-slider-active-segment"></span></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-2 columns small-offset-5 text-center"><span id="articleRatingOutput"></span></div>
+    </div>
+    <div class="row">
+      <div class="small-6 columns">
+        <%= form_tag @article.id + '/rate', remote: true, id: 'rateArticleForm' do %>
+            <%= hidden_field_tag 'articleRating' %>
+            <%= submit_tag 'Rate this Article', class: 'button expand' %>
+        <% end %>
+      </div>
+      <div class="small-6 columns text-center panel">
+        Your previous rating:
+        <% rel = current_user.rels(type: :rates, between: @article) %>
+        <% rating = rel.first.nil? ? "none" : rel.first[:value] %>
+        <%= rating %>
+      </div>
+    </div>
+  </div>
+
+  <div class="small-12 medium-6 columns">
+    When rating an article, please consider:
+    <ul>
+      <li>The authors opinion and how much you agree with it.</li>
+      <li>How well this Article has been written (language).</li>
+      <li>The argumentation. Do the arguments help the author to underline his point of view?</li>
+      <li>The sources. Are they valid and trustworthy?</li>
+    </ul>
+
+  </div>
+</div>
+
+
+
+
+<br/>
+<br/>
+
+<!-- Show the comments -->
 <div class="">
   <% @comments.each do |c| %>
       <div class="panel">
@@ -43,6 +88,8 @@
       </div>
   <% end %>
 </div>
+
+<!-- Give the ability to comment -->
 <% if current_user %>
     <%= form_for [@article, @comment] do |f| %>
         <%= f.text_field :body %>
@@ -53,3 +100,13 @@
       or <%= link_to 'log in', new_user_session_path, class: '' %> to comment on this article.
     </div>
 <% end %>
+
+
+<div class="right">
+  <%= link_to 'Back to the Articles', articles_path, :class => 'button secondary' %>
+  <% if @article.author == current_user %>
+      <%= link_to 'Edit Article', '/editor' + article_path(@article), :class => 'button warning',
+                  id: "edit_link", data: {save_url: mercury_update_article_path(@article), no_turbolink: true} %>
+      <%= link_to 'Delete this Article', @article, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button alert' %>
+  <% end %>
+</div>
