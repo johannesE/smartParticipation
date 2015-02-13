@@ -1,28 +1,30 @@
-<nav class="top-bar" data-topbar role="navigation">
-  <ul class="title-area">
-    <li class="name"><h1><%= link_to 'SmartParticipation', root_path %></h1></li>
-    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
-    <li class="toggle-topbar menu-icon"><a href="#"><!--<span>Menu</span>--></a></li>
-  </ul>
-  <section class="top-bar-section">
-    <!-- Left Nav Section -->
-    <ul class="left">
-      <li class=" <%= 'active' if params[:controller] == 'articles' %>">
-        <%= link_to 'participate', articles_path %>
-      </li>
+<div class="contain-to-grid">
+  <nav class="top-bar" data-topbar role="navigation">
+    <ul class="title-area">
+      <li class="name"><h1><%= link_to 'SmartParticipation', root_path %></h1></li>
+      <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+      <li class="toggle-topbar menu-icon"><a href="#"><!--<span>Menu</span>--></a></li>
     </ul>
-    <!-- Right Nav Section -->
-    <ul class="right">
-      <% if user_signed_in? %>
-          <li class="has-form"><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'button' %></li>
-      <% else %>
-          <li class="has-form">
-            <ul class="button-group">
-              <li><%= link_to 'register', new_user_registration_path, class: 'button' %></li>
-              <li><%= link_to 'login', new_user_session_path, class: 'button' %></li>
-            </ul>
-          </li>
-      <% end %>
-    </ul>
-  </section>
-</nav>
+    <section class="top-bar-section">
+      <!-- Left Nav Section -->
+      <ul class="left">
+        <li class=" <%= 'active' if params[:controller] == 'articles' %>">
+          <%= link_to 'participate', articles_path %>
+        </li>
+      </ul>
+      <!-- Right Nav Section -->
+      <ul class="right">
+        <% if user_signed_in? %>
+            <li class="has-form"><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'button' %></li>
+        <% else %>
+            <li class="has-form">
+              <ul class="button-group">
+                <li><%= link_to 'register', new_user_registration_path, class: 'button' %></li>
+                <li><%= link_to 'login', new_user_session_path, class: 'button' %></li>
+              </ul>
+            </li>
+        <% end %>
+      </ul>
+    </section>
+  </nav>
+</div>

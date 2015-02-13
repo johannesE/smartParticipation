@@ -1,9 +1,10 @@
-<h1>Listing articles</h1>
+<h1>Interact with some of the Articles here</h1>
 
 <table>
   <thead>
   <tr>
     <th>Title</th>
+    <th>Average Rating</th>
     <th colspan="3">Options</th>
   </tr>
   </thead>
@@ -12,6 +13,7 @@
   <% @articles.each do |article| %>
       <tr>
         <td><%= article.title %></td>
+        <td><div class="text-center"><%= article.get_average_rating %></div> </td>
         <td><%= link_to 'Show', article, :class => 'button' %></td>
         <td>
           <% if article.author == current_user %>
