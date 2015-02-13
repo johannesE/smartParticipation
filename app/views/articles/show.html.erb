@@ -5,28 +5,16 @@
 <dl class="tabs" data-tab>
   <dd class="active"><a href="#panel1">Description</a></dd>
   <dd><a href="#panel4">Statistics</a></dd>
-  <dd><a href="#panel2">Images</a></dd>
-  <dd><a href="#panel3">Videos</a></dd>
 </dl>
 <div class="tabs-content">
   <div class="content active" id="panel1">
-    <div id="article_body" class="red-panel" data-mercury="full">
+    <div id="article_body" class="yellow-panel" data-mercury="full">
       <%= raw @article.body %>
     </div>
   </div>
   <div class="content" id="panel4">
     <div class="green-panel">There will be statistics here.
       <h4>Average Rating: <%= @article.get_average_rating %></h4>
-    </div>
-  </div>
-  <div class="content" id="panel2">
-    <div class="yellow-panel">
-      This is not yet implemented.
-    </div>
-  </div>
-  <div class="content" id="panel3">
-    <div class="blue-panel">
-      This is not yet implemented either.
     </div>
   </div>
 </div>
