@@ -50,7 +50,7 @@
           </div>
         </div>
     <% else %>
-    <div class="blue-panel text-center">You need to log in in order to rate articles.</div>
+        <div class="blue-panel text-center">You need to log in in order to rate articles.</div>
     <% end %>
   </div>
 
@@ -72,21 +72,11 @@
 <br/>
 <br/>
 
-<!-- Show the comments -->
-<div class="">
-  <% @comments.each do |c| %>
-      <div class="panel">
-        <%= c.body %>
-        <%= link_to "X", article_comment_path(@article, c),
-                    method: :delete, data: {confirm: 'Are you sure?'},
-                    :class => 'button alert right tiny' %>
-      </div>
-  <% end %>
-</div>
+<%= render 'layouts/list_comments' %>
 
 <!-- Give the ability to comment -->
 <% if current_user %>
-    <%= form_for [@article, @comment] do |f| %>
+    <%= form_for [@article, Comment.new] do |f| %>
         <%= f.text_field :body %>
         <%= f.submit "Comment", class: 'button  small success' %>
     <% end %>

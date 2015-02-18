@@ -1,0 +1,20 @@
+<!-- Show the comments -->
+<div class="">
+  <% @comments.each do |c| %>
+      <div class="panel">
+        <div class="row">
+          <div class="small-12 large-9 columns">
+            <strong><%= c.body %></strong><br><br>
+            There have been <%= c.get_number_of_replies %> replies to this comment.
+          </div>
+          <div class="small-12 large-3 columns">
+            <%= link_to "Interact", article_comment_path(@article, c), class: 'button small' %>
+            <%= link_to "X", article_comment_path(@article, c),
+                        method: :delete, data: {confirm: 'Are you sure?'},
+                        :class => 'button alert small' %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
