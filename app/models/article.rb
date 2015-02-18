@@ -22,7 +22,9 @@ class Article
       sum += r.value
       number += 1
     end
-
+    if number == 0
+      return 0
+    end
     sum / number
   end
 
