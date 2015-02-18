@@ -22,34 +22,36 @@
 <!-- Rate The Article -->
 <div class="row">
   <div class="small-12 medium-6 columns" id="articleRatingDiv">
-    <div class="row">
-      <div class="small-12 medium-12 columns">
-        <div class="range-slider" id="articleRatingSlider" data-slider data-options="display_selector: #articleRatingOutput;">
-          <span class="range-slider-handle" role="slider" tabindex="0"></span>
-          <span class="range-slider-active-segment"></span></div>
-      </div>
-    </div>
+    <% if user_signed_in? %>
+        <div class="row">
+          <div class="small-12 medium-12 columns">
+            <div class="range-slider" id="articleRatingSlider" data-slider data-options="display_selector: #articleRatingOutput;">
+              <span class="range-slider-handle" role="slider" tabindex="0"></span>
+              <span class="range-slider-active-segment"></span></div>
+          </div>
+        </div>
 
-    <div class="row">
-      <div class="small-2 columns small-offset-5 text-center"><span id="articleRatingOutput"></span></div>
-    </div>
-    <div class="row">
-      <div class="small-6 columns">
-        <%= form_tag @article.id + '/rate', remote: true, id: 'rateArticleForm' do %>
-            <%= hidden_field_tag 'articleRating' %>
-            <%= submit_tag 'Rate this Article', class: 'button expand' %>
-        <% end %>
-      </div>
-      <div class="small-6 columns text-center">
-        <br>
-        Your previous rating:
-        <% if user_signed_in? %>
+        <div class="row">
+          <div class="small-2 columns small-offset-5 text-center"><span id="articleRatingOutput"></span></div>
+        </div>
+        <div class="row">
+          <div class="small-6 columns">
+            <%= form_tag @article.id + '/rate', remote: true, id: 'rateArticleForm' do %>
+                <%= hidden_field_tag 'articleRating' %>
+                <%= submit_tag 'Rate this Article', class: 'button expand' %>
+            <% end %>
+          </div>
+          <div class="small-6 columns text-center">
+            <br>
+            Your previous rating:
             <% rel = current_user.rels(type: :rates, between: @article) %>
             <% rating = rel.first.nil? ? "none" : rel.first[:value] %>
             <span id="rating"> <%= rating %> </span>
-        <% end %>
-      </div>
-    </div>
+          </div>
+        </div>
+    <% else %>
+    <div class="blue-panel text-center">You need to log in in order to rate articles.</div>
+    <% end %>
   </div>
 
   <div class="small-12 medium-6 columns">
