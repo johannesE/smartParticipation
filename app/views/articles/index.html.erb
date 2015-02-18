@@ -33,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Article', new_article_path, :class => 'button' %>
+<%= link_to 'New Article', user_signed_in? ? new_article_path : new_user_session_path, :class => 'button' %>

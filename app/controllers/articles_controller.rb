@@ -1,5 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy, :mercury_update, :rate]
+  before_action :verify_user, only: [:edit, :update, :mercury_update, :destroy, :create, :new]
   before_action :verify_author, only: [:edit, :update, :destroy, :mercury_update]
 
   # GET /articles
@@ -78,9 +79,9 @@ class ArticlesController < ApplicationController
 
   def rate
     rating = params[:articleRating]
-    current_user.rels(type: :rates, between: @article).each{|rel| rel.destroy}
+    current_user.rels(type: :rates, between: @article).each { |rel| rel.destroy }
     Rating.create(:value => rating,
-                    :from_node => current_user, :to_node => @article)
+                  :from_node => current_user, :to_node => @article)
     render text: rating
   end
 
@@ -100,5 +101,12 @@ class ArticlesController < ApplicationController
       true
     end
     false
+  end
+
+  def verify_user
+    unless user_signed_in?
+      redirect_to new_user_session_path
+    end
+    true
   end
 end

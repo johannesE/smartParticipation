@@ -43,9 +43,11 @@
       <div class="small-6 columns text-center">
         <br>
         Your previous rating:
-        <% rel = current_user.rels(type: :rates, between: @article) %>
-        <% rating = rel.first.nil? ? "none" : rel.first[:value] %>
-        <span id="rating"> <%= rating %> </span>
+        <% if user_signed_in? %>
+            <% rel = current_user.rels(type: :rates, between: @article) %>
+            <% rating = rel.first.nil? ? "none" : rel.first[:value] %>
+            <span id="rating"> <%= rating %> </span>
+        <% end %>
       </div>
     </div>
   </div>
