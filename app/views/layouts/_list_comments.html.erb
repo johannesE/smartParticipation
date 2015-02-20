@@ -3,7 +3,7 @@
     <div class="panel">
       <div class="row">
         <div class="small-12 large-10 columns">
-          <strong><%= comment.body %></strong><br><br>
+          <div class="strong"><%= simple_format comment.body %></div>
           There have been <%= comment.get_number_of_replies %> replies to this comment.
         </div>
         <div class="small-12 large-2 columns text-right">
