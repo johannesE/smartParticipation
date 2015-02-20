@@ -77,7 +77,7 @@
 <!-- Give the ability to comment -->
 <% if current_user %>
     <%= form_for [@article, Comment.new] do |f| %>
-        <%= f.text_field :body %>
+        <%= f.text_area :body %>
         <%= f.submit "Comment", class: 'button  small success' %>
     <% end %>
 <% else %>
