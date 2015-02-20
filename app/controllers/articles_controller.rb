@@ -85,6 +85,16 @@ class ArticlesController < ApplicationController
     render text: rating
   end
 
+  def rate_comment
+    rating = params[:comment_rating]
+    comment = Comment.find(params[:comment_id])
+    current_user.rels(type: :rates, between: comment).each { |rel| rel.destroy }
+    Rating.create(:value => rating,
+                  :from_node => current_user, :to_node => comment)
+    render text: rating
+  #   TODO: Fix the ajax success function. Render the form element and the comment id.
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_article

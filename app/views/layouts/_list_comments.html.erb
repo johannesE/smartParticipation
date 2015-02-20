@@ -1,20 +1,67 @@
 <!-- Show the comments -->
-<div class="">
-  <% @comments.each do |c| %>
-      <div class="panel">
-        <div class="row">
-          <div class="small-12 large-9 columns">
-            <strong><%= c.body %></strong><br><br>
-            There have been <%= c.get_number_of_replies %> replies to this comment.
+<% @comments.each do |comment| %>
+    <div class="panel">
+      <div class="row">
+        <div class="small-12 large-10 columns">
+          <strong><%= comment.body %></strong><br><br>
+          There have been <%= comment.get_number_of_replies %> replies to this comment.
+        </div>
+        <div class="small-12 large-2 columns text-right">
+          <div class="row">
+            <div class="small-12 columns">
+              <%= link_to "Rate this comment", '#', :class => 'button tiny expand rating', :data => {commentid: comment.id} %>
+            </div>
           </div>
-          <div class="small-12 large-3 columns">
-            <%= link_to "Interact", article_comment_path(@article, c), class: 'button small' %>
-            <%= link_to "X", article_comment_path(@article, c),
-                        method: :delete, data: {confirm: 'Are you sure?'},
-                        :class => 'button alert small' %>
+          <div class="row">
+            <div class="small-12 columns">
+              <%= link_to "Delete this comment", article_comment_path(@article, comment),
+          method: :delete, data: {confirm: 'Are you sure?'},
+          :class => 'button alert tiny expand' %>
+            </div>
           </div>
         </div>
       </div>
-  <% end %>
-</div>
+      <div class="row commentarea" id="commentarea-<%= comment.id %>">
+        <div class="small-12 medium-6 columns commentRatingDiv" id="commentRatingDiv-<%= comment.id %>">
+          <% if user_signed_in? %>
+              <div class="row">
+                <div class="small-12 medium-12 columns">
+                  <div class="range-slider" id="commentRatingSlider" data-slider data-options="display_selector: #commentRatingOutput-<%= comment.id %>;">
+                    <span class="range-slider-handle" role="slider" tabindex="0"></span>
+                    <span class="range-slider-active-segment"></span></div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="small-2 columns small-offset-5 text-center">
+                  <span id="commentRatingOutput-<%= comment.id %>"></span>
+                </div>
+              </div>
+              <div class="row">
+                <div class="small-12 columns">
+                  <%= form_tag @article.id + '/rate_comment', remote: true, id: 'rateCommentForm' do %>
+                      <%= hidden_field_tag 'comment_rating' %>
+                      <%= hidden_field_tag 'comment_id', comment.id %>
+                      <%= submit_tag 'Rate this Comment', class: 'button expand' %>
+                  <% end %>
+                </div>
+              </div>
+          <% else %>
+              <div class="blue-panel text-center">You need to log in in order to rate articles.</div>
+          <% end %>
+        </div>
+
+        <div class="small-12 medium-6 columns">
+          When rating a comment, you might consider:
+          <ul>
+            <li>The authors opinion and how much you agree with it.</li>
+            <li>How well this Comment has been written (language).</li>
+            <li>The argumentation. Do the arguments help the author to underline his point of view?</li>
+            <li>The sources. Are they valid and trustworthy?</li>
+          </ul>
+
+        </div>
+      </div>
+    </div>
+<% end %>
 

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :articles do
     member { put :mercury_update}
     member { post :rate }
+    member { post :rate_comment }
     resources :comments
   end
 

@@ -8,7 +8,7 @@ class Comment
   property :updated_at, type: DateTime
   # property :updated_on, type: Date
 
-  has_many :in, :users, unique: true, rel_class: Rating
+  has_many :in, :ratings, unique: true, rel_class: Rating
   has_one :out, :article, type: :comment_on
   has_one :in, :author, unique: true, type: :authored, model_class: User
 
