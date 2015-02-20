@@ -12,13 +12,15 @@
               <%= link_to "Rate this comment", '#', :class => 'button tiny expand rating', :data => {commentid: comment.id} %>
             </div>
           </div>
-          <div class="row">
-            <div class="small-12 columns">
-              <%= link_to "Delete this comment", article_comment_path(@article, comment),
-          method: :delete, data: {confirm: 'Are you sure?'},
-          :class => 'button alert tiny expand' %>
-            </div>
-          </div>
+          <% if current_user == comment.author %>
+              <div class="row">
+                <div class="small-12 columns">
+                  <%= link_to "Delete this comment", article_comment_path(@article, comment),
+                              method: :delete, data: {confirm: 'Are you sure?'},
+                              :class => 'button alert tiny expand' %>
+                </div>
+              </div>
+          <% end %>
         </div>
       </div>
       <div class="row commentarea" id="commentarea-<%= comment.id %>">
