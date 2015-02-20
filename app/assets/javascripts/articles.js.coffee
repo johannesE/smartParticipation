@@ -5,7 +5,7 @@
 $(document).ready ->
 #  article rating
   $(document).bind "ajaxSuccess", "rateArticleForm", (event, xhr, settings) ->
-    $("#rating").text(xhr.responseText)
+#    $("#rating").text(xhr.responseText)
     $("#rateArticleForm").find(":submit").toggleClass("disabled")
     $("#articleRatingDiv").prepend('<div class="fade-away"><div data-alert class="alert-box success">
       Thank you for your rating.

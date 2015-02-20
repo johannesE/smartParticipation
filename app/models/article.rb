@@ -28,4 +28,8 @@ class Article
     sum / number
   end
 
+  def get_number_of_ratings
+    rels(type: :rates, dir: :incoming).count
+  end
+
 end
