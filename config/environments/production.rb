@@ -73,6 +73,8 @@ Rails.application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  config.action_mailer.delivery_method = :postmark
+  config.action_mailer.postmark_settings = { :api_token => "a4000318-8ff3-441c-bf71-b315bbe1da96" }
 
   config.neo4j.session_type = :server_db
   config.neo4j.session_path = ENV["GRAPHENEDB_URL"] || 'http://localhost:7474'

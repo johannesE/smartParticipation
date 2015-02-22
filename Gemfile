@@ -29,6 +29,8 @@ gem 'spring',        group: :development
 
 gem 'neo4j', '~> 4.1.2'
 gem "devise-neo4j"
+gem 'postmark-rails'
+gem 'letter_opener', :group => :development #show mails locally
 
 
 # Use unicorn as the app server
