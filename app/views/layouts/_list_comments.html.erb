@@ -4,7 +4,8 @@
     <div class="panel">
       <div class="row">
         <div class="small-12 large-10 columns">
-          <div class="strong"><%= simple_format comment.body %></div>
+          Anonymous (this needs usernames as emails should stay private) wrote <%= time_ago_in_words(comment.updated_at) %> ago:<br>
+          <%= simple_format comment.body, class: 'strong' %>
         </div>
         <div class="small-12 large-2 columns text-right">
           <div class="row">

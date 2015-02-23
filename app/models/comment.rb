@@ -13,7 +13,7 @@ class Comment
   has_one :in, :author, unique: true, type: :authored, model_class: User
 
   has_many :out, :children, model_class: Comment, unique: true
-  has_one :in, :child_of, model_class: Comment, unique: true
+  has_one :in, :child_of, model_class: Comment, unique: true, type: :children
 
   def get_number_of_replies
     result = 0
