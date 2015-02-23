@@ -1,0 +1,28 @@
+<div class="green-panel">
+  <table>
+    <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>Created at</th>
+      <th><%= @article.created_at.to_s(:long) %> (<%= time_ago_in_words @article.created_at %> ago)</th>
+    </tr>
+    <tr>
+      <th>Edited at</th>
+      <th><%= @article.updated_at.to_s(:long) %> (<%= time_ago_in_words @article.updated_at %> ago)</th>
+    </tr>
+    <tr>
+      <th>Average Rating</th>
+      <th><%= @article.get_average_rating %></th>
+    </tr>
+    <tr>
+      <th>Number of Users that rated this article</th>
+      <th><%= @article.get_number_of_ratings %></th>
+    </tr>
+    </tbody>
+  </table>
+</div>
