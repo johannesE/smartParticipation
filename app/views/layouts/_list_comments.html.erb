@@ -1,10 +1,10 @@
 <!-- Show the comments -->
-<% @comments.each do |comment| %>
+<% @parent.nil? ? comments = @comments : comments = @parent.children %>
+<% comments.each do |comment| %>
     <div class="panel">
       <div class="row">
         <div class="small-12 large-10 columns">
           <div class="strong"><%= simple_format comment.body %></div>
-          There have been <%= comment.get_number_of_replies %> replies to this comment.
         </div>
         <div class="small-12 large-2 columns text-right">
           <div class="row">
@@ -23,6 +23,15 @@
           <% end %>
         </div>
       </div>
+      <% if user_signed_in? %>
+          <div class="row">
+            <%= form_for [@article, Comment.new] do |f| %>
+                <div class="small-10 columns"><%= f.text_area :body %>
+                  <%= f.hidden_field :parent, value: comment.id %></div>
+                <div class="small-2 columns"><%= f.submit "Reply", class: 'button small expand' %></div>
+            <% end %>
+          </div>
+      <% end %>
       <div class="row commentarea" id="commentarea-<%= comment.id %>">
         <div class="small-12 medium-6 columns commentRatingDiv" id="commentRatingDiv-<%= comment.id %>">
           <% if user_signed_in? %>
@@ -65,5 +74,10 @@
         </div>
       </div>
     </div>
+    <div class="nested">
+      <% if comment.get_number_of_replies != 0 %>
+          <% @parent = comment %>
+          <%= render "layouts/list_comments" %>
+      <% end %></div>
 <% end %>
 

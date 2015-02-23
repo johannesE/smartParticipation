@@ -29,7 +29,15 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        @article.comments << @comment
+        if params[:comment][:parent].nil?
+        #this is not a nested comment
+          @article = Article.find(params[:article_id])
+          @article.comments << @comment
+        else
+          #this is a nested comment
+          @parent = Comment.find(params[:comment][:parent])
+          @parent.children << @comment
+        end
         @comment.author = current_user
 
         format.html { redirect_to @article, notice: 'Comment was successfully created.' }
@@ -67,13 +75,13 @@ class CommentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:body)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
 end

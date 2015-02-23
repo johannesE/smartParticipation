@@ -1,0 +1,10 @@
+
+<% @parent.children.each do |comment| %>
+    <div class="panel">
+      Here comes a child.
+    </div>
+    <% if comment.get_number_of_replies != 0 %>
+        <% @parent = comment %>
+        <%= render "layouts/list_children" %>
+    <% end %>
+<% end %>

@@ -12,14 +12,18 @@ class Comment
   has_one :out, :article, type: :comment_on
   has_one :in, :author, unique: true, type: :authored, model_class: User
 
-  has_many :both, :comment_children, model_class: Comment, unique: true
+  has_many :out, :children, model_class: Comment, unique: true
+  has_one :in, :child_of, model_class: Comment, unique: true
 
   def get_number_of_replies
-    if comments.count == 0
-      0
-    else
-      comments.count + comments.each.get_number_of_replies
+    result = 0
+    unless children.count == 0
+      result += children.count
+      children.each do |child|
+        result += child.get_number_of_replies
+      end
     end
+    result
   end
 
 
