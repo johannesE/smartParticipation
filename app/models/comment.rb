@@ -1,6 +1,7 @@
 class Comment
   include Neo4j::ActiveNode
   property :body, type: String
+  property :pos_neg, type: Boolean
 
   property :created_at, type: DateTime
   # property :created_on, type: Date

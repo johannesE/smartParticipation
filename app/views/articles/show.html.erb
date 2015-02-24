@@ -70,19 +70,50 @@
 <br/>
 <br/>
 
-<%= render 'layouts/list_comments' %>
-
+<div class="row">
+  <% @filter_value = true %>
+  <div class="small-12 medium-6 columns"><%= render 'layouts/list_comments' %></div>
+  <% @parent = nil %>
+  <% @filter_value = false %>
+  <div class="small-12 medium-6 columns"><%= render 'layouts/list_comments' %></div>
+</div>
 <!-- Give the ability to comment -->
-<% if current_user %>
-    <%= form_for [@article, Comment.new] do |f| %>
-        <%= f.text_area :body %>
-        <%= f.submit "Comment", class: 'button  small success' %>
-    <% end %>
-<% else %>
-    <div class="panel success">You need to <%= link_to 'sign up', new_user_registration_path, class: '' %>
-      or <%= link_to 'log in', new_user_session_path, class: '' %> to comment on this article.
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <div class="row">
+      <% if current_user %>
+          <%= form_for [@article, Comment.new] do |f| %>
+              <div class="small-9 columns">
+                <%= f.text_area :body %>
+                <%= f.hidden_field :pos_neg, value: false %>
+              </div>
+              <div class="small-3 columns">
+                <%= f.submit "Comment (+)", class: 'button expand small success' %>
+              </div>
+          <% end %>
+      <% else %>
+          <div class="panel success">You need to <%= link_to 'sign up', new_user_registration_path, class: '' %>
+            or <%= link_to 'log in', new_user_session_path, class: '' %> to comment on this article.
+          </div>
+      <% end %>
     </div>
-<% end %>
+  </div>
+  <div class="small-12 medium-6 columns">
+    <div class="row">
+      <% if current_user %>
+          <%= form_for [@article, Comment.new] do |f| %>
+              <div class="small-9 columns">
+                <%= f.text_area :body %>
+                <%= f.hidden_field :pos_neg, value: false %>
+              </div>
+              <div class="small-3 columns">
+                <%= f.submit "Comment (-)", class: 'button expand small success' %>
+              </div>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
 
 
 <div class="right">

@@ -1,13 +1,17 @@
 <!-- Show the comments -->
-<% @parent.nil? ? comments = @comments : comments = @parent.children %>
+<% if @parent.nil? then
+     comments = @article.comments.where(pos_neg: @filter_value)
+   else
+     comments = @parent.children
+   end %>
 <% comments.each do |comment| %>
     <div class="panel">
       <div class="row">
-        <div class="small-12 large-10 columns">
+        <div class="small-12 medium-9 columns">
           <%= comment.author.username.nil? ? "Anonymous" : comment.author.username %> wrote <%= time_ago_in_words(comment.updated_at) %> ago:<br>
           <%= simple_format comment.body, class: 'strong' %>
         </div>
-        <div class="small-12 large-2 columns text-right">
+        <div class="small-12 medium-3 columns text-right">
           <div class="row">
             <div class="small-12 columns">
               <%= link_to "Rate this comment", '#', :class => 'button tiny expand rating', :data => {commentid: comment.id} %>
@@ -27,34 +31,26 @@
       <% if user_signed_in? %>
           <div class="row">
             <%= form_for [@article, Comment.new] do |f| %>
-                <div class="small-10 columns"><%= f.text_area :body %>
+                <div class="small-9 columns"><%= f.text_area :body %>
                   <%= f.hidden_field :parent, value: comment.id %></div>
-                <div class="small-2 columns"><%= f.submit "Reply", class: 'button small expand' %></div>
+                <div class="small-3 columns"><%= f.submit "Reply", class: 'button small expand' %></div>
             <% end %>
           </div>
       <% end %>
       <div class="row commentarea" id="commentarea-<%= comment.id %>">
-        <div class="small-12 medium-6 columns commentRatingDiv" id="commentRatingDiv-<%= comment.id %>">
+        <div class="small-12 columns commentRatingDiv" id="commentRatingDiv-<%= comment.id %>">
           <% if user_signed_in? %>
               <div class="row">
-                <div class="small-12 medium-12 columns">
+                <div class="small-9 columns">
                   <div class="range-slider" id="commentRatingSlider" data-slider data-options="display_selector: #commentRatingOutput-<%= comment.id %>;">
                     <span class="range-slider-handle" role="slider" tabindex="0"></span>
                     <span class="range-slider-active-segment"></span></div>
                 </div>
-              </div>
-
-              <div class="row">
-                <div class="small-2 columns small-offset-5 text-center">
-                  <span id="commentRatingOutput-<%= comment.id %>"></span>
-                </div>
-              </div>
-              <div class="row">
-                <div class="small-12 columns">
+                <div class="small-3 columns">
                   <%= form_tag @article.id + '/rate_comment', remote: true, id: 'rateCommentForm' do %>
                       <%= hidden_field_tag 'comment_rating' %>
                       <%= hidden_field_tag 'comment_id', comment.id %>
-                      <%= submit_tag 'Rate this Comment', class: 'button expand' %>
+                      <%= submit_tag 'Rate', class: 'button expand' %>
                   <% end %>
                 </div>
               </div>
@@ -63,16 +59,6 @@
           <% end %>
         </div>
 
-        <div class="small-12 medium-6 columns">
-          When rating a comment, you might consider:
-          <ul>
-            <li>The authors opinion and how much you agree with it.</li>
-            <li>How well this comment has been written (language).</li>
-            <li>The argumentation. Do the arguments help the author to underline his point of view?</li>
-            <li>The sources. Are they valid and trustworthy?</li>
-          </ul>
-
-        </div>
       </div>
     </div>
     <div class="nested">
