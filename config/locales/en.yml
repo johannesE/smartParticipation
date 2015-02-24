@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+  neo4j:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              taken: "has already been taken."
