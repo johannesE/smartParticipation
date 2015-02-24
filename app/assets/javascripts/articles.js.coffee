@@ -32,9 +32,17 @@ $(document).ready ->
     event.preventDefault()
     return
 
+  $(".commentSubmit").click (event) ->
+    form = $(this).parent()
+    commentId = form.find("#comment_id").attr("value")
+    slider = $("#commentRatingSlider-" + commentId)
+    rating = slider.attr("data-slider")
+    form.find("#comment_rating").val(rating)
+    return
+
   $(document).bind "ajaxSuccess", "rateCommentForm", (event, xhr, settings) ->
 #    $("#rating").text(xhr.responseText)
-    $("#rateCommentForm").find(":submit").toggleClass("disabled")
+    $(".rateCommentForm").find(":submit").toggleClass("disabled")
     $(".commentRatingDiv").prepend('<div class="fade-away"><div data-alert class="alert-box success">
           Thank you for your rating of ' + xhr.responseText +
       '.</div></div>')
@@ -42,17 +50,16 @@ $(document).ready ->
     return
 
   $(document).bind "ajax:beforeSend", "rateCommentForm", (event, xhr, settings) ->
-    $("#rateCommentForm").find(":submit").toggleClass("disabled")
+    $(".rateCommentForm").find(":submit").toggleClass("disabled")
     return
 
   $(document).bind "ajaxError", "rateArticleForm", (event, xhr, settings) ->
     alert("There has been an error while saving your Article. Please contact the system administrator to inform him of that error.")
-    $("#rateCommentForm").find(":submit").toggleClass("disabled")
+    $(".rateCommentForm").find(":submit").toggleClass("disabled")
     return
 
   return
 
 $(document).foundation slider: on_change: ->
   $("#articleRating").val($('#articleRatingSlider').attr('data-slider');)
-  $("#comment_rating").val($('#commentRatingSlider').attr('data-slider');)
   return

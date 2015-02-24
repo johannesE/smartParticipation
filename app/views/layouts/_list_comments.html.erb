@@ -42,16 +42,21 @@
           <% if user_signed_in? %>
               <div class="row">
                 <div class="small-9 columns">
-                  <div class="range-slider" id="commentRatingSlider" data-slider data-options="display_selector: #commentRatingOutput-<%= comment.id %>;">
+                  <div class="range-slider commentRatingSlider" id="commentRatingSlider-<%= comment.id %>" data-slider data-options="display_selector: #commentRatingOutput-<%= comment.id %>;">
                     <span class="range-slider-handle" role="slider" tabindex="0"></span>
                     <span class="range-slider-active-segment"></span></div>
                 </div>
                 <div class="small-3 columns">
-                  <%= form_tag @article.id + '/rate_comment', remote: true, id: 'rateCommentForm' do %>
+                  <%= form_tag @article.id + '/rate_comment', remote: true, class: 'rateCommentForm' do %>
                       <%= hidden_field_tag 'comment_rating' %>
                       <%= hidden_field_tag 'comment_id', comment.id %>
-                      <%= submit_tag 'Rate', class: 'button expand' %>
+                      <%= submit_tag 'Rate', class: 'button expand commentSubmit', id: "submit-"+comment.id %>
                   <% end %>
+                </div>
+              </div>
+              <div class="row">
+                <div class="small-2 columns small-offset-5 text-center">
+                  <span id="commentRatingOutput-<%= comment.id %>"></span>
                 </div>
               </div>
           <% else %>

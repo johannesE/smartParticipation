@@ -27,5 +27,18 @@ class Comment
     result
   end
 
+  def get_average_rating
+    sum = 0
+    number = 0
+
+    rels(type: :rates, dir: :incoming).each do |r|
+      sum += r.value
+      number += 1
+    end
+    if number == 0
+      return 0
+    end
+    sum / number
+  end
 
 end
