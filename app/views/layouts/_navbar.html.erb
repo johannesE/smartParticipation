@@ -15,7 +15,11 @@
       <!-- Right Nav Section -->
       <ul class="right">
         <% if user_signed_in? %>
-            <li class="has-form"><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'button' %></li>
+            <li class="has-form">
+              <ul class="button-group">
+                <li><%= link_to 'edit static profile', edit_user_registration_path, class: 'button' %></li>
+                <li><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'button' %></li>
+              </ul></li>
         <% else %>
             <li class="has-form">
               <ul class="button-group">
