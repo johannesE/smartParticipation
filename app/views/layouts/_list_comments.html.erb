@@ -4,7 +4,7 @@
     <div class="panel">
       <div class="row">
         <div class="small-12 large-10 columns">
-          <%= current_user.username.nil? ? "Anonymous" : current_user.username %> wrote <%= time_ago_in_words(comment.updated_at) %> ago:<br>
+          <%= comment.author.username.nil? ? "Anonymous" : comment.author.username %> wrote <%= time_ago_in_words(comment.updated_at) %> ago:<br>
           <%= simple_format comment.body, class: 'strong' %>
         </div>
         <div class="small-12 large-2 columns text-right">
