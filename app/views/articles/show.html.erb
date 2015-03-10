@@ -85,7 +85,7 @@
           <%= form_for [@article, Comment.new] do |f| %>
               <div class="small-9 columns">
                 <%= f.text_area :body %>
-                <%= f.hidden_field :pos_neg, value: false %>
+                <%= f.hidden_field :pos_neg, value: true %>
               </div>
               <div class="small-3 columns">
                 <%= f.submit "Comment (+)", class: 'button expand small success' %>
