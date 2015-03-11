@@ -74,11 +74,15 @@
   <% @filter_value = false %>
   <div class="small-12 medium-6 columns"><%= render 'layouts/list_comments' %></div>
 </div>
+
 <!-- Give the ability to comment -->
+<% if user_signed_in? %>
+    <div class="text-center">If you have a mixed opinion about the topic, please divide it into two different comments.</div>
+<% end %>
 <div class="row">
   <div class="small-12 medium-6 columns">
     <div class="row">
-      <% if current_user %>
+      <% if user_signed_in? %>
           <%= form_for [@article, Comment.new] do |f| %>
               <div class="small-9 columns">
                 <%= f.text_area :body %>
@@ -97,7 +101,7 @@
   </div>
   <div class="small-12 medium-6 columns">
     <div class="row">
-      <% if current_user %>
+      <% if user_signed_in? %>
           <%= form_for [@article, Comment.new] do |f| %>
               <div class="small-9 columns">
                 <%= f.text_area :body %>
