@@ -13,6 +13,7 @@ class Article
   has_many :in, :ratings, unique: true, rel_class: Rating
   has_many :in, :comments, unique: true, type: :comment_on
   has_one :in, :author, unique: true, type: :authored, model_class: User
+  has_one :out, :category, unique: true, model_class: Category
 
   def get_average_rating
     sum = 0

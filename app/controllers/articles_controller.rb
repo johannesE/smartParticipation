@@ -35,6 +35,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       if @article.save
         @article.author = current_user
+        @article.category = Category.find(params[:article][:category])
 
         format.html { redirect_to @article, notice: 'Article was successfully created.' }
         format.json { render :show, status: :created, location: @article }
@@ -103,7 +104,7 @@ class ArticlesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :category)
   end
 
   def verify_author

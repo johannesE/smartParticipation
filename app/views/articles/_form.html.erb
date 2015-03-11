@@ -8,6 +8,10 @@
       <%= f.label "Description" %>
       <%= f.text_area :body %>
     </div>
+    <div class="field">
+      <%= f.label "Category" %>
+      <%= f.select :category, Category.all.collect { |c| [c.name, c.id] } %>
+    </div>
     <div class="actions">
       <%= f.submit "submit", class: "button" %>
     </div>
