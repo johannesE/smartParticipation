@@ -8,6 +8,11 @@
     </thead>
     <tbody>
     <tr>
+      <th>Category</th>
+      <th><%= @article.category.nil? ? "Undefined" : @article.category.name %>
+        <%= current_user == @article.author ? (link_to "(change)", edit_article_path(@article)) : ""%> </th>
+    </tr>
+    <tr>
       <th>Created at</th>
       <th><%= @article.created_at.to_s(:long) %> (<%= time_ago_in_words @article.created_at %> ago)</th>
     </tr>
