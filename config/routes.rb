@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'recommendations/show'
+
   root 'welcome#index'
   devise_for :users
 
