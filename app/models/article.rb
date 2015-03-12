@@ -43,10 +43,10 @@ class Article
     ratings.each do |r|
       square_difference.append((mean_rating - r.value) ** 2)
     end
-    result = 0
-    square_difference.collect{ |s| result += s}
-    result = result / get_number_of_ratings(ratings)
-    self.standard_deviation = Math.sqrt(result) # will be returned
+    variance = 0
+    square_difference.collect{ |s| variance += s}
+    variance = variance / get_number_of_ratings(ratings)
+    self.standard_deviation = Math.sqrt(variance) # will be returned
   end
 
 end
