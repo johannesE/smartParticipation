@@ -1,0 +1,45 @@
+<h1>Your Recommendations</h1>
+
+<div class="row">
+  <div class="small-12 medium-4 columns">
+    <h3>Articles</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th colspan="1">Options</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @articles.each do |article| %>
+          <tr>
+            <td><%= article.title %></td>
+            <td><%= link_to 'Show', article, :class => 'button' %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="small-12 medium-4 columns">
+    <h3>Users</h3>
+    <table>
+      <thead>
+      <tr>
+        <th>Title</th>
+        <th colspan="1">Options</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @users.each do |user| %>
+          <tr>
+            <td><%= user.username %></td>
+            <td><%= link_to 'Show', '#', :class => 'button' %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

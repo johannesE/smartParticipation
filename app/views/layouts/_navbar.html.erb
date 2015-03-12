@@ -11,6 +11,9 @@
         <li class=" <%= 'active' if params[:controller] == 'articles' %>">
           <%= link_to 'participate', articles_path %>
         </li>
+        <li class=" <%= 'active' if params[:controller] == 'recommendations' %>">
+          <%= link_to 'recommendations', recommendations_show_path %>
+        </li>
       </ul>
       <!-- Right Nav Section -->
       <ul class="right">
