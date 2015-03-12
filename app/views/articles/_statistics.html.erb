@@ -25,8 +25,12 @@
       <th><%= @article.get_average_rating %></th>
     </tr>
     <tr>
-      <th>Number of Users that rated this article</th>
+      <th>Number of Users that rated this Article</th>
       <th><%= @article.get_number_of_ratings %></th>
+    </tr>
+    <tr>
+      <th>Standard Deviation of the Ratings</th>
+      <th><%= @article.get_standard_deviation_of_ratings %></th>
     </tr>
     </tbody>
   </table>

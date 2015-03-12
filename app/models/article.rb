@@ -3,7 +3,6 @@ class Article
   property :title, type: String
   property :body, type: String
 
-
   property :created_at, type: DateTime
   # property :created_on, type: Date
 
@@ -15,11 +14,10 @@ class Article
   has_one :in, :author, unique: true, type: :authored, model_class: User
   has_one :out, :category, unique: true, model_class: Category
 
-  def get_average_rating
+  def get_average_rating(ratings = rels(type: :rates, dir: :incoming))
     sum = 0
     number = 0
-
-    rels(type: :rates, dir: :incoming).each do |r|
+    ratings.each do |r|
       sum += r.value
       number += 1
     end
@@ -29,8 +27,22 @@ class Article
     sum / number
   end
 
-  def get_number_of_ratings
-    rels(type: :rates, dir: :incoming).count
+  def get_number_of_ratings(ratings = rels(type: :rates, dir: :incoming))
+    ratings.count
+  end
+
+  # noinspection RubyInstanceMethodNamingConvention
+  def get_standard_deviation_of_ratings
+    ratings = rels(type: :rates, dir: :incoming)
+    mean_rating = get_average_rating ratings
+    square_difference = []
+    ratings.each do |r|
+      square_difference.append((mean_rating - r.value) ** 2)
+    end
+    result = 0
+    square_difference.collect{ |s| result += s}
+    result = result / get_number_of_ratings(ratings)
+    Math.sqrt(result) # will be returned
   end
 
 end
