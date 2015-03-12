@@ -1,5 +1,7 @@
 class Article
   include Neo4j::ActiveNode
+  before_save :get_standard_deviation_of_ratings
+
   property :title, type: String
   property :body, type: String
 
@@ -8,6 +10,8 @@ class Article
 
   property :updated_at, type: DateTime
   # property :updated_on, type: Date
+
+  property :standard_deviation, type: Float
 
   has_many :in, :ratings, unique: true, rel_class: Rating
   has_many :in, :comments, unique: true, type: :comment_on
@@ -42,7 +46,7 @@ class Article
     result = 0
     square_difference.collect{ |s| result += s}
     result = result / get_number_of_ratings(ratings)
-    Math.sqrt(result) # will be returned
+    self.standard_deviation = Math.sqrt(result) # will be returned
   end
 
 end
