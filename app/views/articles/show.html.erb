@@ -1,6 +1,14 @@
 <h1 id="article_title" data-mercury="simple">
   <%= raw @article.title %>
 </h1>
+<div class="right">
+  <%= link_to 'Back to the Articles', articles_path, :class => 'button secondary' %>
+  <% if @article.author == current_user %>
+      <%= link_to 'Edit Article', '/editor' + article_path(@article), :class => 'button warning',
+                  id: "edit_link", data: {save_url: mercury_update_article_path(@article), no_turbolink: true} %>
+      <%= link_to 'Delete this Article', @article, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button alert' %>
+  <% end %>
+</div>
 
 <dl class="tabs" data-tab>
   <dd class="active"><a href="#panel1">Description</a></dd>
@@ -114,14 +122,4 @@
       <% end %>
     </div>
   </div>
-</div>
-
-
-<div class="right">
-  <%= link_to 'Back to the Articles', articles_path, :class => 'button secondary' %>
-  <% if @article.author == current_user %>
-      <%= link_to 'Edit Article', '/editor' + article_path(@article), :class => 'button warning',
-                  id: "edit_link", data: {save_url: mercury_update_article_path(@article), no_turbolink: true} %>
-      <%= link_to 'Delete this Article', @article, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button alert' %>
-  <% end %>
 </div>
