@@ -30,6 +30,13 @@
           <a href="#" class="close">&times;</a>
         </div>
     <% end %>
+    <% if flash[:error] %>
+        <div data-alert class="alert-box alert">
+          <%= flash[:error] %>
+          <a href="#" class="close">&times;</a>
+        </div>
+    <% end %>
+
     <%= yield %>
   </div>
 </div>

@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>Body</th>
-      <th colspan="3"></th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
@@ -12,9 +12,8 @@
     <% @comments.each do |comment| %>
       <tr>
         <td><%= comment.body %></td>
-        <td><%= link_to 'Show', comment %></td>
-        <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
-        <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', @article %></td>
+        <td><%= link_to 'Edit', edit_article_comment_path(@article, comment) %></td>
       </tr>
     <% end %>
   </tbody>
