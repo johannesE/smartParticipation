@@ -1,6 +1,6 @@
 class Article
   include Neo4j::ActiveNode
-  before_save :get_popularity
+  before_save :update_recommender_value
 
   property :title, type: String
   property :body, type: String
@@ -56,7 +56,7 @@ class Article
     self.popularity = Math.log get_number_of_ratings, 10 # base = 10
   end
 
-  def get_recommender_value
+  def update_recommender_value
     self.recommender_value = self.get_popularity * self.get_standard_deviation_of_ratings
   end
 

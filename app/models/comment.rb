@@ -41,4 +41,8 @@ class Comment
     sum / number
   end
 
+  def update_recommender_value
+    # TODO: include the comments in the recommendations and use this value.
+  end
+
 end

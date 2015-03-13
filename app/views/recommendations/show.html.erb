@@ -10,15 +10,15 @@
       <thead>
       <tr>
         <th>Title</th>
-        <th colspan="1">Options</th>
+        <th>Computed</th>
       </tr>
       </thead>
 
       <tbody>
       <% @new_user_articles.each do |article| %>
           <tr>
-            <td><%= article.title %></td>
-            <td><%= link_to 'Show', article, :class => 'button' %></td>
+            <td><%= link_to article.title, article, :class => '' %></td>
+            <td><%= article.recommender_value.round(3) %></td>
           </tr>
       <% end %>
       </tbody>
