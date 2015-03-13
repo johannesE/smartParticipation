@@ -2,7 +2,10 @@
 
 <div class="row">
   <div class="small-12 medium-4 columns">
-    <h3>Articles</h3>
+    <div class="green-panel"><h4>Articles</h4>
+    Rating these will greatly improve your recommendation accuracy.
+      <br>
+      <br>
     <table>
       <thead>
       <tr>
@@ -12,18 +15,45 @@
       </thead>
 
       <tbody>
-      <% @articles.each do |article| %>
+      <% @new_user_articles.each do |article| %>
           <tr>
             <td><%= article.title %></td>
             <td><%= link_to 'Show', article, :class => 'button' %></td>
           </tr>
       <% end %>
       </tbody>
-    </table>
+    </table></div>
   </div>
 
+    <div class="small-12 medium-4 columns">
+      <div class="blue-panel"><h4>Articles</h4>
+      You should enjoy reading these.
+        <br>
+        <br>
+      <table>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th colspan="1">Options</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <% @articles.each do |article| %>
+            <tr>
+              <td><%= article.title %></td>
+              <td><%= link_to 'Show', article, :class => 'button' %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table></div>
+    </div>
+
   <div class="small-12 medium-4 columns">
-    <h3>Users</h3>
+    <div class="yellow-panel"><h4>Users</h4>
+      Ever thought about starting a discussion group or political party with these people?
+      <br>
+      <br>
     <table>
       <thead>
       <tr>
@@ -40,6 +70,6 @@
           </tr>
       <% end %>
       </tbody>
-    </table>
+    </table></div>
   </div>
 </div>

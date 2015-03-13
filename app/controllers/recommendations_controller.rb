@@ -1,6 +1,13 @@
 class RecommendationsController < ApplicationController
   def show
-    @articles = Article.all.order(standard_deviation: :desc ).limit(20)
+    # new users:
+    @new_user_articles = Article.all.order(recommender_value: :desc ).limit(20)
+
+
+    #the following is only accurate for experienced users.
+    @articles = Article.all.limit(20)
+
+
     @users = User.all.limit(20)
   end
 end

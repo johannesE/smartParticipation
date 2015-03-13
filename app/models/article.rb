@@ -1,6 +1,6 @@
 class Article
   include Neo4j::ActiveNode
-  before_save :get_standard_deviation_of_ratings, :get_popularity
+  before_save :get_popularity
 
   property :title, type: String
   property :body, type: String
@@ -11,9 +11,10 @@ class Article
   property :updated_at, type: DateTime
   # property :updated_on, type: Date
 
+  # The following fields are redundant and only there for performance reasons
   property :standard_deviation, type: Float
-
   property :popularity, type: Float
+  property :recommender_value, type: Float
 
   has_many :in, :ratings, unique: true, rel_class: Rating
   has_many :in, :comments, unique: true, type: :comment_on
@@ -52,7 +53,11 @@ class Article
   end
 
   def get_popularity
-    self.popularity = 0
+    self.popularity = Math.log get_number_of_ratings, 10 # base = 10
+  end
+
+  def get_recommender_value
+    self.recommender_value = self.get_popularity * self.get_standard_deviation_of_ratings
   end
 
 end
