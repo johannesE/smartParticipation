@@ -2,7 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-$(document).ready ->
+ready = ->
+  $(document).foundation()
 #  article rating
   $(document).bind "ajaxSuccess", "rateArticleForm", (event, xhr, settings) ->
 #    $("#rating").text(xhr.responseText)
@@ -63,3 +64,6 @@ $(document).ready ->
 $(document).foundation slider: on_change: ->
   $("#articleRating").val($('#articleRatingSlider').attr('data-slider');)
   return
+
+$(document).ready(ready);
+$(document).on('page:load', ready);
