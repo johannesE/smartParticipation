@@ -4,23 +4,26 @@
 
 ready = ->
   $(document).foundation()
+
 #  article rating
+  $(document).unbind "ajaxSuccess"
   $(document).bind "ajaxSuccess", "rateArticleForm", (event, xhr, settings) ->
 #    $("#rating").text(xhr.responseText)
-    $("#rateArticleForm").find(":submit").toggleClass("disabled")
+    $("#rateArticleForm").find(":submit").removeClass("disabled")
     $("#articleRatingDiv").prepend('<div class="fade-away"><div data-alert class="alert-box success">
       Thank you for your rating.
       </div></div>')
-    $(".fade-away").fadeOut(4000)
+    $(".fade-away").fadeOut(5000)
     return
-
+  $(document).unbind "ajax:beforeSend"
   $(document).bind "ajax:beforeSend", "rateArticleForm", (event, xhr, settings) ->
-    $("#rateArticleForm").find(":submit").toggleClass("disabled")
+    $("#rateArticleForm").find(":submit").addClass("disabled")
     return
 
+  $(document).unbind "ajaxError"
   $(document).bind "ajaxError", "rateArticleForm", (event, xhr, settings) ->
     alert("There has been an error while saving your Article. Please contact the system administrator to inform him of that error.")
-    $("#rateArticleForm").find(":submit").toggleClass("disabled")
+    $("#rateArticleForm").find(":submit").removeClass("disabled")
     return
 
 #  comment rating
@@ -43,7 +46,7 @@ ready = ->
 
   $(document).bind "ajaxSuccess", "rateCommentForm", (event, xhr, settings) ->
 #    $("#rating").text(xhr.responseText)
-    $(".rateCommentForm").find(":submit").toggleClass("disabled")
+    $(".rateCommentForm").find(":submit").removeClass("disabled")
     $(".commentRatingDiv").prepend('<div class="fade-away"><div data-alert class="alert-box success">
           Thank you for your rating of ' + xhr.responseText +
       '.</div></div>')
@@ -51,12 +54,12 @@ ready = ->
     return
 
   $(document).bind "ajax:beforeSend", "rateCommentForm", (event, xhr, settings) ->
-    $(".rateCommentForm").find(":submit").toggleClass("disabled")
+    $(".rateCommentForm").find(":submit").addClass("disabled")
     return
 
   $(document).bind "ajaxError", "rateArticleForm", (event, xhr, settings) ->
     alert("There has been an error while saving your Article. Please contact the system administrator to inform him of that error.")
-    $(".rateCommentForm").find(":submit").toggleClass("disabled")
+    $(".rateCommentForm").find(":submit").removeClass("disabled")
     return
 
   return
