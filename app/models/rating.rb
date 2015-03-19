@@ -16,7 +16,7 @@ class Rating
   # property :updated_on, type: Date
 
   def update_recommendation_values
-    to_class.update_recommender_value
+    to_node.update_recommender_value
   end
 
 end
