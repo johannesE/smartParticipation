@@ -4,6 +4,7 @@ class Rating
 
 
   property :value, type: Integer
+  property :usable, type: Boolean
 
   from_class User
   to_class :any

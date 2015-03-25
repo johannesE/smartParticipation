@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-  get 'profile/index'
+  get 'profile/own' # must stand above the resources for profile
+  resources :profile
 
   get 'recommendations/show'
 

@@ -1,0 +1,27 @@
+<h1><%= @profile.user.username %>'s Profile</h1>
+
+Recommendations:
+<%= @profile.use_recommendations %><br><br>
+
+<%= form_for(@profile) do |f| %>
+    <div class="row panel">
+      <div class="field">
+        Do you want your ratings to be used for any recommendations?
+        Turning this off will not allow you to receive personalized ratings or connect with people.
+        You can however still rate items and uncheck this box at a later time
+        when your trust in the system has improved.
+
+        <div class="row">
+          <div class="small-3 columns"><%= f.label "Allow the use of my ratings for recommendations:" %></div>
+          <div class="small-9 columns"><%= f.check_box :use_recommendations %></div>
+        </div>
+      </div>
+      <div class="actions">
+        <%= f.submit "Update", class: "button" %>
+      </div>
+    </div>
+<% end %>
+<br>
+<br>
+
+<%= link_to "User Settings", edit_user_registration_path, class: 'button' %>

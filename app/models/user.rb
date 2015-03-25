@@ -1,6 +1,8 @@
 class User
   include Neo4j::ActiveNode
 
+  after_save :create_profile
+
   #
   # Neo4j.rb needs to have property definitions before any validations. So, the property block needs to come before
   # loading your devise modules.
@@ -11,7 +13,7 @@ class User
 
   has_many :out, :articles, unique: true, type: :authored
   has_many :out, :comments, unique: true, type: :authored
-  has_many :out, :ratings, unique: true, rel_class: Rating
+  has_many :out, :ratings, unique: true, rel_class: Rating, model_class: false
   has_one :out, :profile, unique: true, type: :profile_of, model_class: Profile
 
   property :username, :type => String
@@ -65,5 +67,13 @@ class User
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def create_profile
+    profile = Profile.create use_recommendations: true
+    self.profile = profile
+  end
+
+
+
 
 end

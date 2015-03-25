@@ -1,5 +1,12 @@
 class ProfileController < ApplicationController
-  def index
+  def edit
+  end
+
+  def show
+    @profile = Profile.find(params[:id])
+  end
+
+  def own
     if user_signed_in?
       @profile = current_user.profile
       if @profile.nil? #First time the user wants to change his settings, so we have to create the object.
@@ -10,5 +17,41 @@ class ProfileController < ApplicationController
     else
       redirect_to new_user_session_path
     end
+    render :edit
   end
+
+  def update
+    #TODO: check if own user
+
+    @profile = Profile.find params[:id]
+    respond_to do |format|
+      if @profile.update(profile_params)
+
+        disable_all_ratings @profile
+
+        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.json { render :show, status: :ok, location: @profile }
+      else
+        format.html { render :edit }
+        format.json { render json: @profile.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+
+
+
+  private
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_params
+    params.require(:profile).permit(:use_recommendations)
+  end
+
+  def disable_all_ratings(profile)
+    user = profile.user
+    user.ratings.each_rel.select do |rating|
+      rating.usable = profile.use_recommendations
+    end
+  end
+
 end
