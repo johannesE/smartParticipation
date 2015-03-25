@@ -3,8 +3,6 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
-  $(document).foundation()
-
 #  article rating
   $(document).unbind "ajaxSuccess"
   $(document).bind "ajaxSuccess", "rateArticleForm", (event, xhr, settings) ->
