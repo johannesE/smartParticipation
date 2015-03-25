@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
@@ -18,6 +19,7 @@
 
 var ready;
 ready = function() {
+    console.log("The page is ready!");
     $(document).foundation();
 };
 $(document).ready(ready);

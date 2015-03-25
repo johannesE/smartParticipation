@@ -44,5 +44,6 @@ gem 'letter_opener', :group => :development #show mails locally
 
 
 gem 'foundation-rails'
+gem 'jquery-turbolinks'
 
 gem 'mercury-rails', git: 'https://github.com/jejacks0n/mercury.git'
