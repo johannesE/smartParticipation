@@ -21,9 +21,10 @@ class ProfileController < ApplicationController
   end
 
   def update
-    #TODO: check if own user
-
     @profile = Profile.find params[:id]
+    unless @profile.user == current_user
+      redirect_to redirect_to @profile, alert: 'You can only edit your own profile. Nice try though. :P'
+    end
     respond_to do |format|
       if @profile.update(profile_params)
 
