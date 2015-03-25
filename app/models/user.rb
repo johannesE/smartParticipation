@@ -1,5 +1,6 @@
 class User
   include Neo4j::ActiveNode
+
   #
   # Neo4j.rb needs to have property definitions before any validations. So, the property block needs to come before
   # loading your devise modules.
@@ -11,6 +12,7 @@ class User
   has_many :out, :articles, unique: true, type: :authored
   has_many :out, :comments, unique: true, type: :authored
   has_many :out, :ratings, unique: true, rel_class: Rating
+  has_one :out, :profile, unique: true, type: :profile_of, model_class: Profile
 
   property :username, :type => String
   property :facebook_token, :type => String

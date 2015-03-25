@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'profile/index'
+
   get 'recommendations/show'
 
   root 'welcome#index'

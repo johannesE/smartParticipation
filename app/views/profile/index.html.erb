@@ -1,0 +1,8 @@
+<h1><%= @profile.user.username %>'s Profile</h1>
+
+Recommendations:
+<%= @profile.use_recommendations %><br><br>
+
+
+
+<%= link_to "User Settings", edit_user_registration_path, class: 'button' %>
