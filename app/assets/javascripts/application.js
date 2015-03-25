@@ -16,11 +16,3 @@
 //= require foundation
 //= require turbolinks
 //= require_tree .
-
-var ready;
-ready = function() {
-    console.log("The page is ready!");
-    $(document).foundation();
-};
-$(document).ready(ready);
-$(document).on('page:load', ready);
