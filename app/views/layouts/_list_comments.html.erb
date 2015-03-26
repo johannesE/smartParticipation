@@ -66,10 +66,11 @@
 
       </div>
     </div>
-    <div class="nested">
       <% if comment.get_number_of_replies != 0 %>
+        <div class="nested">
           <% @parent = comment %>
           <%= render "layouts/list_comments" %>
-      <% end %></div>
+        </div>
+      <% end %>
 <% end %>
 
