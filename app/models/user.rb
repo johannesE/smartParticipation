@@ -69,7 +69,7 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   def create_profile
-    profile = Profile.create use_recommendations: true
+    profile = Profile.create use_recommendations: true, can_be_contacted: true
     self.profile = profile
   end
 
