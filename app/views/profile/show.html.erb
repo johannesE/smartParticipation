@@ -1,4 +1,23 @@
 <h1><%= @profile.user.username %>'s Profile</h1>
 
-Recommendations:
-<%= @profile.use_recommendations %><br><br>
+<div class="green-panel">
+  <table>
+    <thead>
+    <tr>
+      <th>Metric</th>
+      <th>Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>Recommendations</th>
+      <th><%= @profile.use_recommendations %></th>
+    </tr>
+    <tr>
+      <th>Can be contacted</th>
+      <th><%= @profile.can_be_contacted %></th>
+    </tr>
+
+    </tbody>
+  </table>
+</div>

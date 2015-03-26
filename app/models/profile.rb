@@ -8,6 +8,7 @@ class Profile
   # property :updated_on, type: Date
 
   property :use_recommendations, type: Boolean
+  property :can_be_contacted, type: Boolean
 
   has_one :in, :user, type: :profile_of, unique: true, model_class: User
 

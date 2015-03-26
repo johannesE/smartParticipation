@@ -10,7 +10,7 @@ class ProfileController < ApplicationController
     if user_signed_in?
       @profile = current_user.profile
       if @profile.nil? #First time the user wants to change his settings, so we have to create the object.
-        profile = Profile.create use_recommendations: true #Default value
+        profile = Profile.create use_recommendations: true, can_be_contacted: true #Default values
         profile.user = current_user
         @profile = profile
       end
@@ -28,7 +28,7 @@ class ProfileController < ApplicationController
     respond_to do |format|
       if @profile.update(profile_params)
 
-        disable_all_ratings @profile
+        modify_all_ratings @profile
 
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { render :show, status: :ok, location: @profile }
@@ -43,10 +43,10 @@ class ProfileController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def profile_params
-    params.require(:profile).permit(:use_recommendations)
+    params.require(:profile).permit(:use_recommendations, :can_be_contacted)
   end
 
-  def disable_all_ratings(profile)
+  def modify_all_ratings(profile)
     user = profile.user
     user.ratings.each_rel.select do |rating|
       rating.usable = profile.use_recommendations
