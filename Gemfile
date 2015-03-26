@@ -43,7 +43,6 @@ gem 'letter_opener', :group => :development #show mails locally
 # gem 'debugger', group: [:development, :test]
 
 
-gem 'foundation-rails'
-gem 'jquery-turbolinks'
+gem 'foundation-rails', git: 'https://github.com/zurb/foundation-rails'
 
 gem 'mercury-rails', git: 'https://github.com/jejacks0n/mercury.git'
