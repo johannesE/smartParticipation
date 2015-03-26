@@ -52,6 +52,7 @@ class ProfileController < ApplicationController
     user = profile.user
     user.ratings.each_rel.select do |rating|
       rating.usable = profile.use_recommendations
+      rating.save
     end
   end
 
