@@ -3,33 +3,34 @@
 <div class="row">
   <div class="small-12 medium-4 columns">
     <div class="green-panel"><h4>Articles</h4>
-    Rating these will greatly improve your recommendation accuracy.
+      Rating these will greatly improve your recommendation accuracy.
       <br>
       <br>
-    <table>
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th>Computed</th>
-      </tr>
-      </thead>
+      <table>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th>Computed</th>
+        </tr>
+        </thead>
 
-      <tbody>
-      <% @new_user_articles.each do |article| %>
-          <tr>
-            <td><%= link_to article.title, article, :class => '' %></td>
-            <td><%= article.recommender_value.round(3) %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table></div>
+        <tbody>
+        <% @new_user_articles.each do |article| %>
+            <tr>
+              <td><%= link_to article.title, article, :class => '' %></td>
+              <td><%= article.recommender_value.round(3) %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-    <div class="small-12 medium-4 columns">
-      <div class="blue-panel"><h4>Articles</h4>
+  <div class="small-12 medium-4 columns">
+    <div class="blue-panel"><h4>Articles</h4>
       You should enjoy reading these.
-        <br>
-        <br>
+      <br>
+      <br>
       <table>
         <thead>
         <tr>
@@ -46,30 +47,37 @@
             </tr>
         <% end %>
         </tbody>
-      </table></div>
+      </table>
     </div>
+  </div>
 
   <div class="small-12 medium-4 columns">
     <div class="yellow-panel"><h4>Users</h4>
       Ever thought about starting a discussion group or political party with these people?
       <br>
       <br>
-    <table>
-      <thead>
-      <tr>
-        <th>Title</th>
-        <th colspan="1">Options</th>
-      </tr>
-      </thead>
+      <table>
+        <thead>
+        <tr>
+          <th>Title</th>
+          <th colspan="1">Options</th>
+        </tr>
+        </thead>
 
-      <tbody>
-      <% @users.each do |user| %>
-          <tr>
-            <td><%= user.username %></td>
-            <td><%= link_to 'Show', '#', :class => 'button' %></td>
-          </tr>
-      <% end %>
-      </tbody>
-    </table></div>
+        <tbody>
+        <% @users.each do |user| %>
+            <tr>
+              <td><%= user.username %></td>
+              <% profile = user.profile %>
+              <% if profile.nil? %>
+                  <td><%= link_to 'Show', "#", :class => 'button disabled' %></td>
+              <% else %>
+                  <td><%= link_to 'Show', profile_path(profile), :class => 'button' %></td>
+              <% end %>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
