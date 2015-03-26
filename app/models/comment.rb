@@ -16,7 +16,7 @@ class Comment
   has_many :out, :children, model_class: Comment, unique: true
   has_one :in, :child_of, model_class: Comment, unique: true, type: :children
 
-  validates_length_of :body, within: 30..1000, too_long: ' is too long (max. 1000 letters)',
+  validates_length_of :body, within: 10..1000, too_long: ' is too long (max. 1000 letters)',
                       too_short: 'is too short. Provide more arguments please.'
 
   def get_number_of_replies
