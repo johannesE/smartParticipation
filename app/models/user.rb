@@ -69,7 +69,8 @@ class User
          :recoverable, :rememberable, :trackable, :validatable
 
   def create_profile
-    profile = Profile.create use_recommendations: true, can_be_contacted: true
+    default_values = {use_recommendations: true, can_be_contacted: true, discussion_preference: 50}
+    profile = Profile.create default_values
     self.profile = profile
   end
 
