@@ -9,6 +9,7 @@ class Profile
 
   property :use_recommendations, type: Boolean
   property :can_be_contacted, type: Boolean
+  property :discussion_preference, type: Float
 
   has_one :in, :user, type: :profile_of, unique: true, model_class: User
 

@@ -15,11 +15,27 @@ Recommendations:
           <div class="small-3 columns"><%= f.label "Allow the use of my ratings for recommendations:" %></div>
           <div class="small-9 columns"><%= f.check_box :use_recommendations %></div>
         </div>
+        <br><br>
         Do you want to be able to be contacted? If a user contacts you via your profile page
         you will receive an email with his message.
         <div class="row">
           <div class="small-3 columns"><%= f.label "Allow users to contact me via my profile page:" %></div>
           <div class="small-9 columns"><%= f.check_box :can_be_contacted %></div>
+        </div>
+        <br><br>
+        The following setting influences your recommendations.
+        Are you rather looking for people to actively discuss different topics?
+        Then move the slider to the left. If you prefer to get people recommended which
+        share your opinion, move the slider to the right. <br>
+        This value has immediate effect on your <%= link_to "ratings", recommendations_show_path %>. <br><br>
+        <div class="row">
+          <div class="small-3 columns"><span class="right"> Discussion</span></div>
+          <div class="small-6 columns">
+            <div class="range-slider" data-slider><span class="range-slider-handle" role="slider" tabindex="0"></span>
+              <span class="range-slider-active-segment"></span> <input type="hidden" name="profile[discussion_preference]">
+            </div>
+          </div>
+          <div class="small-3 columns">Opinion</div>
         </div>
       </div>
       <div class="actions">

@@ -43,7 +43,7 @@ class ProfileController < ApplicationController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def profile_params
-    params.require(:profile).permit(:use_recommendations, :can_be_contacted)
+    params.require(:profile).permit(:use_recommendations, :can_be_contacted, :discussion_preference)
   end
 
   def modify_all_ratings(profile)
