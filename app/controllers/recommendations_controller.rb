@@ -8,6 +8,7 @@ class RecommendationsController < ApplicationController
     @articles = Article.all.limit(20)
 
     user_id = current_user.id
+    #  MATCH (n:User) <--> (m) <--> (user:User) WHERE (n <> m AND n.uuid = '8f4e7dd7-d047-427f-8540-7102ef008529') RETURN count(distinct m), user ORDER BY count(distinct m) DESC LIMIT {limit_21} | {"limit_21"=>21}
     result = Neo4j::Session.query.
         match("(n:User) <--> (m) <--> (user:User)").
         where("n <> m AND n.uuid = '#{user_id}'").
@@ -17,6 +18,5 @@ class RecommendationsController < ApplicationController
     users = result.to_a.collect{|r| r.user}
     @users = users
 
-    # match (n:User) <--> (m) <--> (o:User) where n <> m return count(distinct m), o order by count(distinct m) DESC
   end
 end
