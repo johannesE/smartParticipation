@@ -39,6 +39,7 @@ class Article
 
   # noinspection RubyInstanceMethodNamingConvention
   def get_standard_deviation_of_ratings
+    # TODO: Standard Deviation Cipher (stdevp()) from http://neo4j.com/docs/2.2.0/query-aggregation.html
     ratings = rels(type: :rates, dir: :incoming)
     mean_rating = get_average_rating ratings
     square_difference = []
