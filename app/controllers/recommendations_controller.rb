@@ -20,9 +20,11 @@ class RecommendationsController < ApplicationController
     result = Neo4j::Session.query.
         match("(me:User) -[r1:`rates`]-> (m) <-[r2:`rates`]- (other:User)").
         where("me <> other AND me.uuid = '#{user_id}'").
-        return("(m.standard_deviation - ABS(r1.value - r2.value)) AS rating_closeness, other"). # abs = absolute value in cypher
-        order("rating_closeness ASC").
+        with("(m.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other"). # ABS() = absolute value in cypher
+        return("other, sum(rating_diff)"). # other is the group key
+        order("sum(rating_diff) ASC"). # The weighted rating difference should be small
         limit(10)
+
     @political_users = result.to_a.collect{|r| r.other}
 
   end
