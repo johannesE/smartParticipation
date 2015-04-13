@@ -15,8 +15,7 @@ class RecommendationsController < ApplicationController
         return("count(distinct m), user").
         order("count(distinct m) DESC").
         limit(20)
-    users = result.to_a.collect{|r| r.user}
-    @users = users
+    @users = result.to_a.collect{|r| r.user}
 
   end
 end
