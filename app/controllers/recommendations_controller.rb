@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
   def show
     unless user_signed_in?
-      redirect_to new_user_session_path
+      redirect_to new_user_session_path, notice: "You need to sign in to have access to personalized recommendations."
       return
     end
     # setup
