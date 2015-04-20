@@ -9,6 +9,11 @@ class Comment
   property :updated_at, type: DateTime
   # property :updated_on, type: Date
 
+  # The following fields are redundant and only there for performance reasons
+  property :standard_deviation, type: Float
+  property :popularity, type: Float
+  property :recommender_value, type: Float
+
   has_many :in, :ratings, unique: true, rel_class: Rating, model_class: User
   has_one :out, :article, type: :comment_on
   has_one :in, :author, unique: true, type: :authored, model_class: User
@@ -30,22 +35,36 @@ class Comment
     result
   end
 
-  def get_average_rating
-    sum = 0
-    number = 0
+  # noinspection RubyInstanceMethodNamingConvention
+  def get_standard_deviation_of_ratings
+    comment_id = self.id
+    query = Neo4j::Session.query.
+        match("()-[rating:`rates`]->(this)").
+        where("this.uuid = '#{comment_id}'").
+        return("stdevp(rating.value)")
+    self.standard_deviation =  query.first.first
+  end
 
-    rels(type: :rates, dir: :incoming).each do |r|
-      sum += r.value
-      number += 1
-    end
-    if number == 0
-      return 0
-    end
-    sum / number
+  def get_average_rating
+    comment_id = self.id
+    query = Neo4j::Session.query.
+      match("()-[rating:`rates`]->(this)").
+      where("this.uuid = '#{comment_id}'").
+      return("avg(rating.value)")
+    query.first.first
+  end
+
+  def get_popularity
+    self.popularity = Math.log get_number_of_ratings, 10 # base = 10
+  end
+
+  def get_number_of_ratings(ratings = rels(type: :rates, dir: :incoming))
+    ratings.count
   end
 
   def update_recommender_value
-    # TODO: include the comments in the recommendations and use this value.
+    self.recommender_value = self.get_popularity * self.get_standard_deviation_of_ratings
+    self.save!
   end
 
 end
