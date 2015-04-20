@@ -27,7 +27,6 @@ class RecommendationsController < ApplicationController
         return("other, sum(rating_diff)"). # other is the group key
         order("sum(rating_diff) ASC"). # The weighted rating difference should be small
         limit(10)
-
     @political_users = result.to_a.collect{|r| r.other}
 
   end

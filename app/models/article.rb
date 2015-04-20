@@ -20,17 +20,13 @@ class Article
   has_one :in, :author, unique: true, type: :authored, model_class: User
   has_one :out, :category, unique: true, model_class: Category
 
-  def get_average_rating(ratings = rels(type: :rates, dir: :incoming))
-    sum = 0
-    number = 0
-    ratings.each do |r|
-      sum += r.value
-      number += 1
-    end
-    if number == 0
-      return 0
-    end
-    sum / number
+  def get_average_rating
+    article_id = self.id
+    query = Neo4j::Session.query.
+        match("()-[rating:`rates`]->(this)").
+        where("this.uuid = '#{article_id}'").
+        return("avg(rating.value)")
+    query.first.first
   end
 
   def get_number_of_ratings(ratings = rels(type: :rates, dir: :incoming))
@@ -39,17 +35,12 @@ class Article
 
   # noinspection RubyInstanceMethodNamingConvention
   def get_standard_deviation_of_ratings
-    # TODO: Standard Deviation Cipher (stdevp()) from http://neo4j.com/docs/2.2.0/query-aggregation.html
-    ratings = rels(type: :rates, dir: :incoming)
-    mean_rating = get_average_rating ratings
-    square_difference = []
-    ratings.each do |r|
-      square_difference.append((mean_rating - r.value) ** 2)
-    end
-    variance = 0
-    square_difference.collect{ |s| variance += s}
-    variance = variance / get_number_of_ratings(ratings)
-    self.standard_deviation = Math.sqrt(variance) # will be returned
+    article_id = self.id
+    query = Neo4j::Session.query.
+        match("()-[rating:`rates`]->(this)").
+        where("this.uuid = '#{article_id}'").
+        return("stdevp(rating.value)")
+    self.standard_deviation =  query.first.first
   end
 
   def get_popularity
