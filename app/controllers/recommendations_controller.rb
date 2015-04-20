@@ -17,34 +17,34 @@ class RecommendationsController < ApplicationController
     interaction_query = Neo4j::Session.query.
         match("(me:User) <--> (m) <--> (other:User)").
         where("me <> m AND me <> other AND me.uuid = '#{user_id}'").
-        return("count(distinct m), other").
-        order("count(distinct m) DESC").
+        return("count(distinct m) AS computed, other AS user").
+        order("computed DESC").
         limit(10)
-    @users = interaction_query.to_a.collect{|r| r.other}
+    @users = interaction_query.to_a
 
     # users with the same opinion (TODO: include the average rating of a user.)
     political_query = Neo4j::Session.query.
-        match("(me:User) -[r1:`rates`]-> (m) <-[r2:`rates`]- (other:User)"). # m can be user or article.
+        match("(me:User) -[r1:`rates`]-> (a) <-[r2:`rates`]- (other:User)"). # m can be user or article.
         where("me <> other AND me.uuid = '#{user_id}'").
-        with("(m.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other"). # ABS() = absolute value in cypher
-        return("other, sum(rating_diff)"). # other is the group key
-        order("sum(rating_diff) ASC"). # The weighted rating difference should be small
+        with("(a.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other"). # ABS() = absolute value in cypher
+        return("other as user, sum(rating_diff) AS computed"). # other is the group key
+        order("computed ASC"). # The weighted rating difference should be small
         limit(10)
-    @political_users = political_query.to_a.collect{|r| r.other}
+    @political_users = political_query.to_a
 
+    political_users = @political_users.collect{|po| po.user}
     other_ids = Array.new
-    @political_users.each do |u|
+    political_users.each do |u|
       other_ids << u.id # add the user id to the query
     end
     # unread articles from my favourite political users
     article_query =  Neo4j::Session.query.
         match("(me:User),(article) <-[r2:`rates`]- (other:User)").
         where("NOT (me) -- (article) AND me.uuid = '#{user_id}' AND other.uuid IN #{other_ids}").
-        return("article, avg(r2.value)").
-        order("avg(r2.value) desc")
+        return("article, avg(r2.value) AS computed").
+        order("computed")
 
-    @articles = article_query.to_a.collect{|r| r.article}
-
+    @articles = article_query.to_a
 
 
   end

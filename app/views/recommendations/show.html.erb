@@ -35,15 +35,15 @@
         <thead>
         <tr>
           <th>Title</th>
-          <th colspan="1">Options</th>
+          <th>Computed</th>
         </tr>
         </thead>
 
         <tbody>
-        <% @articles.each do |article| %>
+        <% @articles.each do |art_comp| %>
             <tr>
-              <td><%= article.title %></td>
-              <td><%= link_to 'Show', article, :class => 'button' %></td>
+              <td><%= link_to art_comp.article.title, art_comp.article %></td>
+              <td><%= art_comp.computed %></td>
             </tr>
         <% end %>
         </tbody>
@@ -60,20 +60,20 @@
         <thead>
         <tr>
           <th>Title</th>
-          <th colspan="1">Options</th>
+          <th>Computed</th>
         </tr>
         </thead>
 
         <tbody>
-        <% @users.each do |user| %>
+        <% @users.each do |user_comp| %>
             <tr>
-              <td><%= user.username %></td>
-              <% profile = user.profile %>
+              <% profile = user_comp.user.profile %>
               <% if profile.nil? %>
-                  <td><%= link_to 'Show', "#", :class => 'button disabled' %></td>
+                  <td><%= user_comp.user.username %></td>
               <% else %>
-                  <td><%= link_to 'Show', profile_path(profile), :class => 'button' %></td>
+                  <td><%= link_to user_comp.user.username, profile_path(profile) %></td>
               <% end %>
+              <td><%= user_comp.computed %></td>
             </tr>
         <% end %>
         </tbody>
@@ -85,20 +85,21 @@
         <thead>
         <tr>
           <th>Title</th>
-          <th colspan="1">Options</th>
+          <th>Weighted Rating Difference</th>
         </tr>
         </thead>
 
         <tbody>
-        <% @political_users.each do |user| %>
+        <% @political_users.each do |user_comp| %>
             <tr>
-              <td><%= user.username %></td>
-              <% profile = user.profile %>
+              <% profile = user_comp.user.profile %>
               <% if profile.nil? %>
-                  <td><%= link_to 'Show', "#", :class => 'button disabled' %></td>
+                  <td><%= user_comp.user.username %></td>
               <% else %>
-                  <td><%= link_to 'Show', profile_path(profile), :class => 'button' %></td>
+                  <td><%= link_to user_comp.user.username, profile_path(profile) %></td>
               <% end %>
+              <td><%= user_comp.computed %></td>
+
             </tr>
         <% end %>
         </tbody>
