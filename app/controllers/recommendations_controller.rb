@@ -1,5 +1,9 @@
 class RecommendationsController < ApplicationController
   def show
+    unless user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
     # setup
     user_id = current_user.id
 
@@ -21,7 +25,7 @@ class RecommendationsController < ApplicationController
 
     # users with the same opinion
     result = Neo4j::Session.query.
-        match("(me:User) -[r1:`rates`]-> (m) <-[r2:`rates`]- (other:User)").
+        match("(me:User) -[r1:`rates`]-> (m) <-[r2:`rates`]- (other:User)"). # m can be user or article.
         where("me <> other AND me.uuid = '#{user_id}'").
         with("(m.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other"). # ABS() = absolute value in cypher
         return("other, sum(rating_diff)"). # other is the group key
