@@ -1,8 +1,10 @@
+
 <h1>Your Recommendations</h1>
+<%= link_to "Tutorial", "#", id: "tutorial-button", class: "button right alert expand" %>
 
 <div class="row">
   <div class="small-12 medium-4 columns">
-    <div class="green-panel"><h4>Articles</h4>
+    <div id="firstStop" class="green-panel"><h4>Articles</h4>
       Rating these will greatly improve your recommendation accuracy.
       <br>
       <br>
@@ -30,7 +32,7 @@
   </div>
 
   <div class="small-12 medium-4 columns">
-    <div class="blue-panel"><h4>Articles</h4>
+    <div id="middle-column" class="blue-panel"><h4>Articles</h4>
       You should enjoy reading these.
       <br>
       <br>
@@ -57,7 +59,7 @@
   </div>
 
   <div class="small-12 medium-4 columns">
-    <div class="yellow-panel"><h4>Users</h4>
+    <div id="right-column" class="yellow-panel"><h4>Users</h4>
       Ever thought about starting a <b>discussion group</b> with these people?
       <br>
       <br>
@@ -117,3 +119,42 @@
     </div>
   </div>
 </div>
+
+
+<ol class="joyride-list" data-joyride>
+  <li data-text="Next" data-options="tip_location: top; prev_button: false">
+    <h4>Tutorial</h4>
+
+    <p>This page is your personal recommendation page.
+    </p>
+
+    <p>
+      They are based upon your active actions (comments, ratings, ...) which you do on this site.
+      We do NOT measure every click, how long you look at content,
+      facial expressions or any action which you perform on this site
+      where it might not be obvious that you are expressing your opinion.
+    </p>
+  </li>
+  <li data-id="firstStop" data-text="Next" data-prev-text="Prev" data-options="tip_location: right">
+    <h4>New Here?</h4>
+
+    <p>As a new user, you should probably start with these articles.<br>
+      That way the items in the other columns will be more more accurate in the future.</p>
+  </li>
+  <li data-id="middle-column" data-class="custom so-awesome" data-text="Next" data-prev-text="Prev" data-options="tip_location: left">
+    <h4>Interesting Stuff</h4>
+
+    <p>As an experienced user, you should enjoy reading these articles.</p>
+  </li>
+  <li data-id="right-column" data-button="Next" data-prev-text="Prev" data-options="tip_location:left">
+    <h4>Other Users</h4>
+
+    <p>SmartParticipation wants to give you the opportunity to connect with other people of your liking.
+      Both on-and offline. Try it out, send them a message.</p>
+  </li>
+  <li data-button="End" data-prev-text="Prev" data-options="tip_animation:fade">
+    <h4>Enjoy!</h4>
+
+    <p>:-)</p>
+  </li>
+</ol>
