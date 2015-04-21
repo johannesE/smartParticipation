@@ -8,7 +8,9 @@ class RecommendationsController < ApplicationController
     user_id = current_user.id
 
     # new users:
-    @new_user_articles = Article.all.order(recommender_value: :desc).limit(20)
+    new_user_article_query = Neo4j::Session.query.match("(me:User), (a:Article)")
+      .where("NOT (me)--(a) AND me.uuid = '#{user_id}'").return("a").order("a.recommender_value desc").limit(20)
+    @new_user_articles = new_user_article_query.to_a.collect{|arr| arr.a}
 
     #the following is only accurate for experienced users.
 
