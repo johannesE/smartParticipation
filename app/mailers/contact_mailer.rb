@@ -9,7 +9,7 @@ class ContactMailer < ActionMailer::Base
   def user_contacts_user(origin_user, message, target_user)
     @greeting = "Hi " + target_user.username
     @message = message
-    subject = origin_user.username + " has contacted you on SmartParticipation."
+    subject = origin_user.username + " has contacted you on SmartParticipation"
     mail to: target_user.email, reply_to: origin_user.email, from: 'johannes.eifert@unifr.ch', subject: subject
   end
 end
