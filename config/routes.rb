@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   get 'profile/own' # must stand above the resources for profile
+  post 'profile/contact'
   resources :profile
 
   get 'recommendations/show'

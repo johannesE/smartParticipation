@@ -1,27 +1,59 @@
-<h1><%= @profile.user.username %>'s Profile</h1>
+<% username = @profile.user.username || "anonymous" %>
+<h1><%= username %>'s Profile</h1>
 
-<div class="green-panel">
-  <table>
-    <thead>
-    <tr>
-      <th>Metric</th>
-      <th>Value</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <th>Recommendations</th>
-      <th><%= @profile.use_recommendations %></th>
-    </tr>
-    <tr>
-      <th>Can be contacted</th>
-      <th><%= @profile.can_be_contacted %></th>
-    </tr>
-    <tr>
-      <th>Discussion preference</th>
-      <th><%= @profile.discussion_preference %></th>
-    </tr>
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <div class="green-panel">
+      <table>
+        <thead>
+        <tr>
+          <th>Metric</th>
+          <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <th>Recommendations</th>
+          <th><%= @profile.use_recommendations %></th>
+        </tr>
+        <tr>
+          <th>Can be contacted</th>
+          <th><%= @profile.can_be_contacted %></th>
+        </tr>
+        <tr>
+          <th>Discussion preference</th>
+          <th><%= @profile.discussion_preference %></th>
+        </tr>
 
-    </tbody>
-  </table>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="small-12 medium-6 columns">
+    <%= form_tag({controller: "profile", action: "contact"}, 'data-abide' => "") do |f| %>
+
+        <div class="row">
+          <div class="small-3 columns">
+            <%= label_tag :message, "Message", :class => "right inline" %>
+          </div>
+          <div class="small-9 columns">
+            <%= text_area_tag :message, nil, placeholder: "Your Message for " + username, 'required' => "" %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-9 columns">
+            <%= hidden_field_tag "profile_id", @profile.id %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="small-3 columns">
+          </div>
+          <div class="small-9 columns">
+            <%= submit_tag "Submit", :class => "button" %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
 </div>

@@ -40,6 +40,12 @@ class ProfileController < ApplicationController
   end
 
 
+  def contact
+    profile = Profile.find params[:profile_id]
+    ContactMailer.user_contacts_user(current_user, params[:message], profile.user).deliver
+    redirect_to profile, :notice => "The message was sent successfully."
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def profile_params
