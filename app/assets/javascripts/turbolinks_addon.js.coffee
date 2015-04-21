@@ -2,7 +2,7 @@ startSpinner = () ->
   console.log "started fetching"
   $('html').append('<div id="spinner" class="whirly"></div>')
 stopSpinner = () ->
-  $('#spinner').remove()
+  $('.whirly').remove()
   console.log "stopped fetching"
 
 
