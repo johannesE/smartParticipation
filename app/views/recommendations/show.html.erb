@@ -108,7 +108,7 @@
               <% else %>
                   <td><%= link_to user_comp.user.username, profile_path(profile) %></td>
               <% end %>
-              <td><%= user_comp.computed %></td>
+              <td><%= user_comp.computed.round(3) %></td>
 
             </tr>
         <% end %>
