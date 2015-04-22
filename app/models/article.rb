@@ -1,5 +1,6 @@
 class Article
   include Neo4j::ActiveNode
+  after_create :set_recommender_values_0
 
   property :title, type: String
   property :body, type: String
@@ -40,7 +41,7 @@ class Article
         match("()-[rating:`rates`]->(this)").
         where("this.uuid = '#{article_id}'").
         return("stdevp(rating.value)")
-    self.standard_deviation =  query.first.first
+    self.standard_deviation = query.first.first
   end
 
   def get_popularity
@@ -49,6 +50,13 @@ class Article
 
   def update_recommender_value
     self.recommender_value = self.get_popularity * self.get_standard_deviation_of_ratings
+    self.save!
+  end
+
+  def set_recommender_values_0
+    self.standard_deviation = 0
+    self.popularity = 0
+    self.recommender_value = 0
     self.save!
   end
 

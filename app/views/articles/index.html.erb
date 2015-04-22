@@ -4,25 +4,26 @@
   <thead>
   <tr>
     <th>Title</th>
-    <th>Average Rating</th>
+    <th>Popularity</th>
     <th colspan="3">Options</th>
   </tr>
   </thead>
 
   <tbody>
   <% @articles.each do |article| %>
+    <% author = article.author %>
       <tr>
         <td><%= article.title %></td>
-        <td><div class="text-center"><%= article.get_average_rating %></div> </td>
+        <td><%= article.popularity %></td>
         <td><%= link_to 'Show', article, :class => 'button' %></td>
         <td>
-          <% if article.author == current_user %>
+          <% if author == current_user %>
               <%= link_to 'Edit', '/editor' + article_path(article), :class => 'button',
                           data: {save_url: mercury_update_article_path(article), no_turbolink: true} %>
           <% end %>
         </td>
         <td>
-          <% if article.author == current_user %>
+          <% if author == current_user %>
               <%= link_to 'X', article, method: :delete, data: {confirm: 'Are you sure?'}, :class => 'button alert' %>
           <% end %>
         </td>
