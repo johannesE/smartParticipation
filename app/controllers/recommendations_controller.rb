@@ -21,7 +21,7 @@ class RecommendationsController < ApplicationController
         where("me <> m AND me <> other AND me.uuid = '#{user_id}'").
         return("count(distinct m) AS computed, other AS user").
         order("computed DESC").
-        limit(10)
+        limit(5)
     @users = interaction_query.to_a
 
     # users with the same opinion (TODO: include the average rating of a user.)
@@ -31,7 +31,7 @@ class RecommendationsController < ApplicationController
         with("(a.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other").# ABS() = absolute value in cypher
         return("other as user, sum(rating_diff) AS computed").# other is the group key
         order("computed ASC").# The weighted rating difference should be small
-        limit(10)
+        limit(5)
     @political_users = political_query.to_a
 
 
@@ -46,7 +46,7 @@ class RecommendationsController < ApplicationController
         match("(me:User),(article) <-[r2:`rates`]- (other:User)").
         where("NOT (me) -- (article) AND me.uuid = '#{user_id}' AND other.uuid IN #{other_ids}").
         return("article, percentileCont(r2.value, 0.5) AS computed").# percentileCont (x, 0.5 is the median)
-        order("computed desc").limit("20")
+        order("computed desc").limit(20)
     @articles = article_query.to_a
 
     opinion_factor = current_user.profile.discussion_preference
@@ -57,7 +57,7 @@ class RecommendationsController < ApplicationController
       with("(m.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other, m").
       return("(#{discussion_factor} * sum(rating_diff) - #{opinion_factor} * count(distinct m)) AS computed, other AS user").
       order("computed ASC").
-      limit("21")
+      limit(10)
 
     @combination_users = combination_user_query.to_a
 
