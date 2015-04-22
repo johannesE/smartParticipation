@@ -46,7 +46,7 @@ class RecommendationsController < ApplicationController
         match("(me:User),(article) <-[r2:`rates`]- (other:User)").
         where("NOT (me) -- (article) AND me.uuid = '#{user_id}' AND other.uuid IN #{other_ids}").
         return("article, percentileCont(r2.value, 0.5) AS computed").# percentileCont (x, 0.5 is the median)
-        order("computed desc")
+        order("computed desc").limit("20")
     @articles = article_query.to_a
 
     opinion_factor = current_user.profile.discussion_preference
