@@ -70,6 +70,12 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def search
+    search_term = ".*" + params[:search_term] + ".*"
+    @articles = Article.as("a").where("a.title =~ '#{search_term}'").limit(25)
+    render :index
+  end
+
   def mercury_update
     @article.title = params[:content][:article_title][:value]
     @article.body = params[:content][:article_body][:value]

@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
+  root 'welcome#index'
+
+  get 'search/show'
   get 'profile/own' # must stand above the resources for profile
   post 'profile/contact'
   resources :profile
 
   get 'recommendations/show'
 
-  root 'welcome#index'
   devise_for :users
 
   get 'sessions/new', as: :login
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
   mount Mercury::Engine => '/'
   Mercury::Engine.routes
 
+  post 'articles/search'
   resources :articles do
     member { put :mercury_update}
     member { post :rate }

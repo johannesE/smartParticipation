@@ -1,0 +1,32 @@
+<h1>Search</h1>
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <div class="blue-panel">
+
+
+    </div>
+  </div>
+  <div class="small-12 medium-6 columns">
+    <div class="green-panel">
+      <h3>Articles</h3>
+      <%= form_tag({controller: "articles", action: "search"}, 'data-abide' => "") do |f| %>
+
+          <div class="row">
+            <div class="small-3 columns">
+              <%= label_tag :message, "Articles", :class => "right inline" %>
+            </div>
+            <div class="small-9 columns">
+              <%= text_area_tag :search_term, nil, placeholder: "Search term", 'required' => "" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+            </div>
+            <div class="small-9 columns">
+              <%= submit_tag "Submit", :class => "button" %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
