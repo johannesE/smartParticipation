@@ -1,5 +1,5 @@
 <h1>Your Recommendations</h1>
-<%= link_to "Tutorial", "#", id: "tutorial-button", class: "button right alert expand" %>
+<%= link_to "I want more information about this page (tutorial)", "#", id: "tutorial-button", class: "button alert expand" %>
 
 <div class="row">
   <div class="small-12 medium-4 columns">
@@ -59,7 +59,7 @@
 
   <div class="small-12 medium-4 columns">
     <div id="right-column" class="yellow-panel"><h4>Users</h4>
-      Combination:
+      Your recommended users:
       <table>
         <thead>
         <tr>
@@ -81,7 +81,6 @@
                   <td><%= link_to user_comp.user.username, profile_path(profile) %></td>
               <% end %>
               <td><%= user_comp.computed.round(3) %></td>
-
             </tr>
         <% end %>
         </tbody>
@@ -139,7 +138,6 @@
                   <td><%= link_to user_comp.user.username, profile_path(profile) %></td>
               <% end %>
               <td><%= user_comp.computed.round(3) %></td>
-
             </tr>
         <% end %>
         </tbody>
