@@ -52,10 +52,9 @@ class RecommendationsController < ApplicationController
     opinion_factor = current_user.profile.discussion_preference
     discussion_factor = (100 - opinion_factor) / 100 # /100 because otherwise the opinion is practically useless
     combination_user_query = Neo4j::Session.query.
-      match("(me:User) <--> (m) <--> (other:User),
-        (me:User) -[r1:`rates`]-> (a) <-[r2:`rates`]- (other:User)").
+      match("(me:User) -[r1:`rates`]-> (m) <-[r2:`rates`]- (other:User)").
       where("me <> m AND me <> other AND me.uuid = '#{user_id}'").
-      with("(a.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other, m").
+      with("(m.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other, m").
       return("(#{discussion_factor} * sum(rating_diff) - #{opinion_factor} * count(distinct m)) AS computed, other AS user").
       order("computed ASC").
       limit("21")
