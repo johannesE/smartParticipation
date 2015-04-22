@@ -29,7 +29,7 @@
       </table>
     </div>
   </div>
-
+<% if @profile.can_be_contacted %>
   <div class="small-12 medium-6 columns">
     <%= form_tag({controller: "profile", action: "contact"}, 'data-abide' => "") do |f| %>
 
@@ -55,5 +55,7 @@
         </div>
     <% end %>
   </div>
-
+<% else %>
+  This user prefers not to be contacted.
+<% end %>
 </div>
