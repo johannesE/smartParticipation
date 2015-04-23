@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get 'search/show'
+
   get 'profile/own' # must stand above the resources for profile
+  post 'profile/search'
   post 'profile/contact'
   resources :profile
 

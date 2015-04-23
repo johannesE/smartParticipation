@@ -1,0 +1,26 @@
+<h1>User Search Results</h1>
+
+<% if @profiles.size == 0 %>
+    <div class="red-panel">
+      <h6>No user with that name was found. Please try another <%= link_to "search", search_show_path %></h6>
+    </div>
+<% else %>
+    <div class="red-panel">
+      <div class="row">
+        <div class="small-5 columns">Username</div>
+        <div class="small-2 columns">Number of Articles</div>
+        <div class="small-2 columns">Number of Comments</div>
+        <div class="small-3 columns">Action</div>
+      </div>
+    </div>
+    <% @profiles.each do |profile| %>
+        <div class="panel">
+          <div class="row">
+            <div class="small-5 columns"><%= profile.user.username %></div>
+            <div class="small-2 columns"><%= profile.user.articles.count %></div>
+            <div class="small-2 columns"><%= profile.user.comments.count %></div>
+            <div class="small-3 columns"><%= link_to "Show the Profile", @profile, class: 'button expand' %></div>
+          </div>
+        </div>
+    <% end %>
+<% end %>

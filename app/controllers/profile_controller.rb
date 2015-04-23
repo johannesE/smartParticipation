@@ -6,6 +6,11 @@ class ProfileController < ApplicationController
     @profile = Profile.find(params[:id])
   end
 
+  def search
+      search_term = ".*" + params[:search_term] + ".*"
+      @profiles = User.as("u").where("u.username =~ '#{search_term}'").profile.limit(20)
+  end
+
   def own
     if user_signed_in?
       @profile = current_user.profile

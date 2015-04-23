@@ -2,7 +2,24 @@
 <div class="row">
   <div class="small-12 medium-6 columns">
     <div class="blue-panel">
-
+      <h3>Users</h3>
+      <%= form_tag({controller: "profile", action: "search"}, 'data-abide' => "") do |f| %>
+          <div class="row">
+            <div class="small-3 columns">
+              <%= label_tag :message, "Users", :class => "right inline" %>
+            </div>
+            <div class="small-9 columns">
+              <%= text_area_tag :search_term, nil, placeholder: "Search term", 'required' => "" %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-3 columns">
+            </div>
+            <div class="small-9 columns">
+              <%= submit_tag "Submit", :class => "button" %>
+            </div>
+          </div>
+      <% end %>
 
     </div>
   </div>
