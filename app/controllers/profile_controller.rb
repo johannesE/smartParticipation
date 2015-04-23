@@ -28,7 +28,7 @@ class ProfileController < ApplicationController
   def update
     @profile = Profile.find params[:id]
     unless @profile.user == current_user
-      redirect_to redirect_to @profile, alert: 'You can only edit your own profile. Nice try though. :P'
+      redirect_to @profile, alert: 'You can only edit your own profile. Nice try though. :P'
     end
     respond_to do |format|
       if @profile.update(profile_params)
