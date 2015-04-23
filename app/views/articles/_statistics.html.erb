@@ -7,10 +7,15 @@
     </tr>
     </thead>
     <tbody>
+    <% author = @article.author %>
+    <tr>
+      <th>Author</th>
+      <th><%= link_to(author.username.nil? ? "Anonymous" : author.username, author.profile) %> </th>
+    </tr>
     <tr>
       <th>Category</th>
       <th><%= @article.category.nil? ? "Undefined" : @article.category.name %>
-        <%= current_user == @article.author ? (link_to "(change)", edit_article_path(@article)) : ""%> </th>
+        <%= current_user == author ? (link_to "(change)", edit_article_path(@article)) : ""%> </th>
     </tr>
     <tr>
       <th>Created at</th>
