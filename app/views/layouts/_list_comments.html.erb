@@ -8,7 +8,8 @@
     <div class="panel">
       <div class="row">
         <div class="small-12 medium-9 columns">
-          <%= comment.author.username.nil? ? "Anonymous" : comment.author.username %> wrote <%= time_ago_in_words(comment.updated_at) %> ago:<br>
+          <% author = comment.author %>
+          <%= link_to(author.username.nil? ? "Anonymous" : author.username, author.profile) %> wrote <%= time_ago_in_words(comment.updated_at) %> ago:<br>
           <%= simple_format comment.body, class: 'strong' %>
         </div>
         <div class="small-12 medium-3 columns text-right">
