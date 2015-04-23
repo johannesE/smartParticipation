@@ -2,6 +2,8 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
+  resources :feedbacks
+
   get 'search/show'
 
   get 'profile/own' # must stand above the resources for profile

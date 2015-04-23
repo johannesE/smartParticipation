@@ -17,6 +17,11 @@
         <li class=" <%= 'active' if params[:controller] == 'search' %>">
           <%= link_to 'search', search_show_path %>
         </li>
+        <% if user_signed_in? %>
+            <li class=" <%= 'active' if params[:controller] == 'feedbacks' %>">
+              <%= link_to 'feedback', new_feedback_path %>
+            </li>
+        <% end %>
       </ul>
       <!-- Right Nav Section -->
       <ul class="right">
@@ -25,7 +30,8 @@
               <ul class="button-group">
                 <li><%= link_to 'edit static profile', profile_own_path, class: 'button' %></li>
                 <li><%= link_to 'logout', destroy_user_session_path, method: :delete, class: 'button' %></li>
-              </ul></li>
+              </ul>
+            </li>
         <% else %>
             <li class="has-form">
               <ul class="button-group">

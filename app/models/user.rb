@@ -15,6 +15,7 @@ class User
   has_many :out, :comments, unique: true, type: :authored
   has_many :out, :ratings, unique: true, rel_class: Rating, model_class: false
   has_one :out, :profile, unique: true, type: :profile_of, model_class: Profile
+  has_one :out, :feedback, unique: true, type: :feedback, model_class: Feedback
 
   property :username, :type => String
   property :facebook_token, :type => String

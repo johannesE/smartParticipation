@@ -1,0 +1,47 @@
+<h1>Feedback</h1>
+<%= form_for(@feedback, html:{'data-abide' => ""}) do |f| %>
+
+    How do you like the design of SmartParticipation?
+    <div class="row">
+      <div class="small-2 columns"><span class="right">Awful</span></div>
+      <div class="small-8 columns">
+        <div class="range-slider" data-slider data-options="initial: <%= @feedback.design_rating %>;">
+          <span class="range-slider-handle" role="slider" tabindex="0"></span>
+          <span class="range-slider-active-segment"></span>
+          <input type="hidden" name="feedback[design_rating]">
+        </div>
+      </div>
+      <div class="small-2 columns">Awesome</div>
+    </div>
+    How do you like the functionality of SmartParticipation?
+    <div class="row">
+      <div class="small-2 columns"><span class="right">Awful</span></div>
+      <div class="small-8 columns">
+        <div class="range-slider" data-slider data-options="initial: <%= @feedback.functionality_rating %>;">
+          <span class="range-slider-handle" role="slider" tabindex="0"></span>
+          <span class="range-slider-active-segment"></span>
+          <input type="hidden" name="feedback[functionality_rating]">
+        </div>
+      </div>
+      <div class="small-2 columns">Awesome</div>
+    </div>
+    How accurate were your recommendations?
+    <div class="row">
+      <div class="small-2 columns"><span class="right">Awful</span></div>
+      <div class="small-8 columns">
+        <div class="range-slider" data-slider data-options="initial: <%= @feedback.recommendation_rating %>;">
+          <span class="range-slider-handle" role="slider" tabindex="0"></span>
+          <span class="range-slider-active-segment"></span>
+          <input type="hidden" name="feedback[recommendation_rating]">
+        </div>
+      </div>
+      <div class="small-2 columns">Awesome</div>
+    </div>
+    <div class="row">
+      <div class="small-3 columns">
+      </div>
+      <div class="small-9 columns">
+        <%= f.submit "Submit", :class => "button" %>
+      </div>
+    </div>
+<% end %>
