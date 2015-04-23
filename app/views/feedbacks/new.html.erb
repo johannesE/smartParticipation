@@ -1,5 +1,5 @@
 <h1>Feedback</h1>
-<%= form_for(@feedback, html:{'data-abide' => ""}) do |f| %>
+<%= form_tag({controller: "feedbacks", action: "create"}, 'data-abide' => "") do |f| %>
 
     How do you like the design of SmartParticipation?
     <div class="row">
@@ -41,7 +41,7 @@
       <div class="small-3 columns">
       </div>
       <div class="small-9 columns">
-        <%= f.submit "Submit", :class => "button" %>
+        <%= submit_tag "Submit", :class => "button" %>
       </div>
     </div>
 <% end %>
