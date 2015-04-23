@@ -1,5 +1,5 @@
 
-<div>Welcome to SmartParticipation. This site is an ongoing project by Johannes Eifert.
+<div>Welcome to SmartParticipation. This site is an ongoing master thesis project by Johannes Eifert.
   It is based upon the work done by Luis Téran.
 </div>
 
@@ -12,7 +12,10 @@ SmartParticipation is based upon the following technologies:
   <li>Ruby on Rails</li>
   <li>Zurb Foundation</li>
   <li>Neo4j</li>
+  <li>Neo4j.rb</li>
 </ul>
 
-Start here:
-<%= link_to "Article List", articles_path, :class => "button" %>
+<div class="row"><div class="small-8 columns">If you are new here, I suggest you check out some of the articles here:</div>
+<div class="small-4 columns"><%= link_to "Article List", articles_path, :class => "button expand" %></div></div>
+<div class="row"><div class="small-8 columns">Or if you are confident, directly</div>
+<div class="small-4 columns"><%= link_to "Sign up", new_user_registration_path, class: 'button expand' %></div></div>
