@@ -6,7 +6,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all.limit(25)
+    @articles = Article.all.limit(15)
   end
 
   # GET /articles/1
@@ -72,7 +72,7 @@ class ArticlesController < ApplicationController
 
   def search
     search_term = ".*" + params[:search_term] + ".*"
-    @articles = Article.as("a").where("a.title =~ '#{search_term}'").limit(25)
+    @articles = Article.as("a").where("a.title =~ '#{search_term}'").limit(15)
     render :index
   end
 
