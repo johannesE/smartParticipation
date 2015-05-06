@@ -3,13 +3,12 @@
 <%= form_for(@profile) do |f| %>
     <div class="row panel">
       <div class="field">
-        Do you want your ratings to be used for any recommendations?
-        Turning this off will not allow you to receive personalized ratings or connect with people.
-        You can however still rate items and uncheck this box at a later time
-        when your trust in the system has improved.
+        Do you want your ratings to be used for the recommendations of other people?
+        Turning this off will still allow you to receive personalized ratings or connect with people.
+        You can uncheck this box at a later time when your trust in the system has improved.
 
         <div class="row">
-          <div class="small-10 columns"><%= f.label "Allow the use of my ratings for recommendations:" %></div>
+          <div class="small-10 columns"><%= f.label "Allow the use of my ratings for personalized recommendations:" %></div>
           <div class="small-2 columns"><%= f.check_box :use_recommendations %></div>
         </div>
         <br><br>
