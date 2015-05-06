@@ -2,40 +2,54 @@
 
 <%= form_for(@profile) do |f| %>
     <div class="row panel">
-      <div class="field">
-        Do you want your ratings to be used for the recommendations of other people?
-        Turning this off will still allow you to receive personalized ratings or connect with people.
-        You can uncheck this box at a later time when your trust in the system has improved.
+      Do you want your ratings to be used for the recommendations of other people?
+      Turning this off will still allow you to receive personalized ratings or connect with people.
+      You can uncheck this box at a later time when your trust in the system has improved.
 
-        <div class="row">
-          <div class="small-10 columns"><%= f.label "Allow the use of my ratings for personalized recommendations:" %></div>
-          <div class="small-2 columns"><%= f.check_box :use_recommendations %></div>
-        </div>
-        <br><br>
-        Do you want to be able to be contacted? If a user contacts you via your profile page
-        you will receive an email with his message.
-        <div class="row">
-          <div class="small-10 columns"><%= f.label "Allow users to contact me via my profile page:" %></div>
-          <div class="small-2 columns"><%= f.check_box :can_be_contacted %></div>
-        </div>
-        <br><br>
-        The following setting influences your recommendations.
-        Are you rather looking for people to actively discuss different topics?
-        Then move the slider to the left. If you prefer to get people recommended which
-        share your opinion, move the slider to the right. <br>
-        This value has immediate effect on your <%= link_to "recommendations", recommendations_show_path %>. <br><br>
-        <div class="row">
-          <div class="small-2 columns"><span class="right"> Discussion</span></div>
-          <div class="small-8 columns">
-            <div class="range-slider" data-slider data-options="initial: <%= @profile.discussion_preference %>;">
-              <span class="range-slider-handle" role="slider" tabindex="0"></span>
-              <span class="range-slider-active-segment"></span>
-              <input type="hidden" name="profile[discussion_preference]">
-            </div>
+      <div class="row">
+        <div class="small-10 columns"><%= f.label "Allow the use of my ratings for personalized recommendations:" %></div>
+        <div class="small-2 columns"><%= f.check_box :use_recommendations %></div>
+      </div>
+      <br><br>
+      Do you want to be able to be contacted? If a user contacts you via your profile page
+      you will receive an email with his message.
+      <div class="row">
+        <div class="small-10 columns"><%= f.label "Allow users to contact me via my profile page:" %></div>
+        <div class="small-2 columns"><%= f.check_box :can_be_contacted %></div>
+      </div>
+      <br><br>
+      The following setting influences your recommendations.
+      Are you rather looking for people to actively discuss different topics?
+      Then move the slider to the left. If you prefer to get people recommended which
+      share your opinion, move the slider to the right. <br>
+      This value has immediate effect on your <%= link_to "recommendations", recommendations_show_path %>. <br><br>
+
+      <div class="row">
+        <div class="small-2 columns"><span class="right"> Discussion</span></div>
+        <div class="small-8 columns">
+          <div class="range-slider" data-slider data-options="initial: <%= @profile.discussion_preference %>;">
+            <span class="range-slider-handle" role="slider" tabindex="0"></span>
+            <span class="range-slider-active-segment"></span>
+            <input type="hidden" name="profile[discussion_preference]">
           </div>
-          <div class="small-2 columns">Opinion</div>
+        </div>
+        <div class="small-2 columns">Opinion</div>
+      </div>
+      <div class="row">
+        <div class="small-12 medium-4 columns">
+          <div class="text-center"><%= image_tag "opinion-discussion.png" %></div>
+        </div>
+        <div class="small-12 medium-8 columns">
+          The graphic shows different groups of users and which ones are recommended.
+          The following equation might be more clear to other people. It denotes the same relation.
+          <br><br>
+
+          <div class="callout text-center yellow-panel">
+            Computed Value for User x = a * interaction(x) + (1-a) * opinion(x)
+          </div>
         </div>
       </div>
+      <br>
       <div class="actions">
         <%= f.submit "Update", class: "button" %>
       </div>
