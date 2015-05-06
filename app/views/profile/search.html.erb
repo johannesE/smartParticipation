@@ -19,7 +19,7 @@
             <div class="small-5 columns"><%= profile.user.username %></div>
             <div class="small-2 columns"><%= profile.user.articles.count %></div>
             <div class="small-2 columns"><%= profile.user.comments.count %></div>
-            <div class="small-3 columns"><%= link_to "Show the Profile", @profile, class: 'button expand' %></div>
+            <div class="small-3 columns"><%= link_to "Show the Profile", profile, class: 'button expand' %></div>
           </div>
         </div>
     <% end %>
