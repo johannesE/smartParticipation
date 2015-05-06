@@ -76,6 +76,11 @@
 <br/>
 
 <div class="row">
+  <div class="small-12 medium-6 columns"><h4 class="text-centered">Positive Comments</h4></div>
+  <% @parent = nil %>
+  <div class="small-12 medium-6 columns"><h4>Negative Comments</h4></div>
+</div>
+<div class="row">
   <% @filter_value = true %>
   <div class="small-12 medium-6 columns"><%= render 'layouts/list_comments' %></div>
   <% @parent = nil %>
