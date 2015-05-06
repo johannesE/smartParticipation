@@ -1,7 +1,7 @@
 class User
   include Neo4j::ActiveNode
 
-  after_save :create_profile
+  after_create :create_profile
 
   #
   # Neo4j.rb needs to have property definitions before any validations. So, the property block needs to come before
