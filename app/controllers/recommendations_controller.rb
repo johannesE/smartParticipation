@@ -43,7 +43,7 @@ class RecommendationsController < ApplicationController
 
     # unread articles from my favourite political users
     article_query = Neo4j::Session.query.
-        match("(me:User),(article) <-[r2:`rates`]- (other:User)").
+        match("(me:User),(article:Article) <-[r2:`rates`]- (other:User)").
         where("NOT (me) -- (article) AND me.uuid = '#{user_id}' AND other.uuid IN #{other_ids}").
         return("article, percentileCont(r2.value, 0.5) AS computed").# percentileCont (x, 0.5 is the median)
         order("computed desc").limit(20)
