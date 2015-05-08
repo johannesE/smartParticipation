@@ -9,7 +9,7 @@ class RecommendationsController < ApplicationController
 
     # new users:
     new_user_article_query = Neo4j::Session.query.match("(me:User), (a:Article)")
-      .where("NOT (me)--(a) AND me.uuid = '#{user_id}'").return("a").order("a.recommender_value desc").limit(20)
+      .where("NOT (me)--(a) AND me.uuid = '#{user_id}'").return("a").order("a.recommender_value desc").limit(15)
     @new_user_articles = new_user_article_query.to_a.collect{|arr| arr.a}
 
     #the following is only accurate for experienced users.
