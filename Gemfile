@@ -27,7 +27,7 @@ gem 'spring', '~> 1.3.4',       group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'neo4j', '~> 4.1.2'
+gem 'neo4j', '~> 4.1.5'
 gem "devise-neo4j"
 gem 'postmark-rails'
 gem 'letter_opener', :group => :development #show mails locally
