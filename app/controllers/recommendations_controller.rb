@@ -26,7 +26,7 @@ class RecommendationsController < ApplicationController
 
     # users with the same opinion (TODO: include the average rating of a user.)
     political_query = Neo4j::Session.query.
-        match("(me:User) -[r1:`rates`]-> (a) <-[r2:`rates`]- (other:User) <--> (profile:Profile)").# m can be user or article.
+        match("(me:User) -[r1:`rates`]-> (a) <-[r2:`rates`]- (other:User) <--> (profile:Profile)").# a can be comment or article.
         where("me <> other AND me.uuid = '#{user_id}' AND profile.use_recommendations = true").
         with("(a.standard_deviation - ABS(r1.value - r2.value)) AS rating_diff, other").# ABS() = absolute value in cypher
         return("other as user, sum(rating_diff) AS computed").# other is the group key
