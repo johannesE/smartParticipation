@@ -15,7 +15,8 @@ class RecommendationsController < ApplicationController
     #the following is only accurate for experienced users.
 
     # Users with lots of interaction
-    #  MATCH (n:User) <--> (m) <--> (user:User) WHERE (n <> m AND n.uuid = '8f4e7dd7-d047-427f-8540-7102ef008529') RETURN count(distinct m), user ORDER BY count(distinct m) DESC LIMIT {limit_21} | {"limit_21"=>21}
+    #  MATCH (n:User) <--> (m) <--> (user:User) WHERE (n <> m AND n.uuid = '8f4e7dd7-d047-427f-8540-7102ef008529')
+    # RETURN count(distinct m), user ORDER BY count(distinct m) DESC LIMIT {limit_21} | {"limit_21"=>21}
     interaction_query = Neo4j::Session.query.
         match("(me:User) <--> (m) <--> (other:User) <--> (profile:Profile)").
         where("me <> m AND me <> other AND me.uuid = '#{user_id}' AND profile.use_recommendations = true").
