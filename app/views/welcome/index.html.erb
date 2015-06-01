@@ -1,21 +1,60 @@
+<div class="row"><br></div>
 
-<div>Welcome to SmartParticipation. This site is an ongoing master thesis project by Johannes Eifert.
-  It is based upon the work done by Luis Téran.
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <h3>Welcome to SmartParticipation. </h3>
+
+    <div>This site is a master thesis project by Johannes Eifert
+      and based upon the work done by Luis Téran.
+    </div>
+  </div>
+
+  <div class="small-12 medium-6 columns">
+    <h3>About</h3>
+
+    <div class="panel">Smartparticipation supports open discussions and political community building
+      through dynamic profiling.
+    </div>
+  </div>
 </div>
 
-<div class="panel"><h4>Smartparticipation supports open discussions and political community building
-  through dynamic profiling.</h4></div>
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <hr>
+  </div>
+  <div class="small-12 medium-6 columns">
+    <hr>
+  </div>
+</div>
+<div class="row">
+  <div class="small-12 medium-6 columns">
+    <div class="row">
+      <div class="small-8 columns">If you are new here, I suggest you check out
+        some of the articles here:
+      </div>
+      <div class="small-4 columns"><%= link_to "Article List", articles_path, :class => "button expand" %></div>
+    </div>
+    <div class="row">
+      <div class="small-8 columns">Or if you are confident, directly</div>
+      <div class="small-4 columns"><%= link_to "Sign up", new_user_registration_path, class: 'button expand' %></div>
+    </div>
+  </div>
 
+  <div class="small-12 medium-6 columns">
+    SmartParticipation is a web-project that uses a fuzzy-based approach for
+    the creation of political communities. As a user, you interact with the site and its users.
+    Based on that, the system will give you
+    <%= link_to "personalized recommendations", recommendations_show_path %>.
+    <hr>
 
-SmartParticipation is based upon the following technologies:
-<ul>
-  <li>Ruby on Rails</li>
-  <li>Zurb Foundation</li>
-  <li>Neo4j</li>
-  <li>Neo4j.rb</li>
-</ul>
+    SmartParticipation is based upon the following technologies:
+    <ul>
+      <li>Ruby on Rails (full-stack framework)</li>
+      <li>Zurb Foundation (design)</li>
+      <li>Neo4j.rb (database)</li>
+    </ul>
+    <hr>
+    If you have any questions, don't hesitate to write me an email to johannes.eifert[at]unifr.ch.
 
-<div class="row"><div class="small-8 columns">If you are new here, I suggest you check out some of the articles here:</div>
-<div class="small-4 columns"><%= link_to "Article List", articles_path, :class => "button expand" %></div></div>
-<div class="row"><div class="small-8 columns">Or if you are confident, directly</div>
-<div class="small-4 columns"><%= link_to "Sign up", new_user_registration_path, class: 'button expand' %></div></div>
+  </div>
+</div>
